@@ -3,7 +3,7 @@ import * as csv from 'fast-csv'
 import { getPayee, getReference } from './helpers'
 import { MapperInputs, KiwibankCSVRow, XeroCSVRow } from './types'
 
-
+// should return an array to be handled elsewhere
 const mapStatement = ({
   readPath,
   writePath
