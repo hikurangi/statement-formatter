@@ -1,0 +1,5 @@
+const SEPARATOR = ' ; '
+
+export {
+  SEPARATOR
+}

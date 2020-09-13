@@ -1,4 +1,5 @@
-import { KiwibankCSVRow } from './types';
+import { KiwibankCSVRow } from './types'
+import { SEPARATOR } from './constants'
 
 const payeeKeys: (keyof KiwibankCSVRow)[] = [
   'OP name',
@@ -23,7 +24,7 @@ const getCellValue = (keys: (keyof KiwibankCSVRow)[], row: KiwibankCSVRow): stri
     }
   })
 
-  return cellContents.join(' ; ');
+  return cellContents.join(SEPARATOR);
 }
 
 const getPayee = (row: KiwibankCSVRow): string => getCellValue(payeeKeys, row)
