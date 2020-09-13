@@ -1,32 +1,33 @@
-import { KiwibankCSVRow } from '../assets/types';
+import { KiwibankCSVRow } from './types';
 
-const getPayee = (row: KiwibankCSVRow): string => {
-  let payee = [];
+const payeeKeys: (keyof KiwibankCSVRow)[] = [
+  'OP name',
+  'OP Bank Account Number'
+]
 
-  if (row['OP name']) {
-    payee.push(row['OP name']);
-  }
+const referenceKeys: (keyof KiwibankCSVRow)[] = [
+  'TP ref',
+  'TP part',
+  'TP code',
+  'OP ref',
+  'OP part',
+  'OP code'
+]
 
-  if (row['OP Bank Account Number']) {
-    payee.push(row['OP Bank Account Number']);
-  }
+const getCellValue = (keys: (keyof KiwibankCSVRow)[], row: KiwibankCSVRow): string => {
+  let cellContents: (string | number)[] = [];
 
-  return payee.join(' ; '); // join on an empty array results in an empty string?
-};
+  keys.forEach(k => {
+    if (row[k]) {
+      cellContents.push(row[k])
+    }
+  })
 
-const getReference = (row: KiwibankCSVRow): string => "" // {
-  // let payee = [];
+  return cellContents.join(' ; ');
+}
 
-  // if (row['OP name']) {
-  //   payee.push(row['OP name']);
-  // }
-
-  // if (row['OP Bank Account Number']) {
-  //   payee.push(row['OP Bank Account Number']);
-  // }
-
-  // return payee.join(' ; '); // join on an empty array results in an empty string?
-//};
+const getPayee = (row: KiwibankCSVRow): string => getCellValue(payeeKeys, row)
+const getReference = (row: KiwibankCSVRow): string => getCellValue(referenceKeys, row)
 
 export {
   getPayee,
