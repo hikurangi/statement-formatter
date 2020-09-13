@@ -108,7 +108,11 @@ dist
 *.CSV
 
 # Js files since we're using TS
-*.js
+src/*.js
+index.js
+
+# Explicitly keep Babel config (unnecessary but safer)
+!babel.config.js
 
 # macOS
 .DS_Store

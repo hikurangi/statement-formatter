@@ -6,7 +6,8 @@
   "scripts": {
     "start:dev": "npm run compile:dev & nodemon",
     "start": "npm run compile & node ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "compile:dev": "tsc -w",
     "compile": "tsc"
   },
@@ -16,6 +17,12 @@
     "fast-csv": "^4.3.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.13",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2",
     "nodemon": "^2.0.4"
   }
 }
