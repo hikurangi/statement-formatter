@@ -1,0 +1,21 @@
+{
+  "name": "csv-formatter",
+  "version": "1.0.0",
+  "description": "Format Kiwibank CSVs and PDFs to CSV.",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "npm run compile:dev & nodemon",
+    "start": "npm run compile & node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:dev": "tsc -w",
+    "compile": "tsc"
+  },
+  "author": "Hikurangi Schaverien-Kaa",
+  "license": "ISC",
+  "dependencies": {
+    "fast-csv": "^4.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
