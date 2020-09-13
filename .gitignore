@@ -107,9 +107,11 @@ dist
 *.csv
 *.CSV
 
+# XLSX files
+*.xlsx
+
 # Js files since we're using TS
-src/*.js
-index.js
+*.js
 
 # Explicitly keep Babel config (unnecessary but safer)
 !babel.config.js
