@@ -109,3 +109,6 @@ dist
 
 # Js files since we're using TS
 *.js
+
+# macOS
+.DS_Store
