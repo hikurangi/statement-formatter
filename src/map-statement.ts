@@ -1,13 +1,13 @@
 import * as fs from 'fs'
 import * as csv from 'fast-csv'
 import { getPayee, getReference } from './helpers'
-import { FormatInputs, KiwibankCSVRow, XeroCSVRow } from './types'
+import { MapperInputs, KiwibankCSVRow, XeroCSVRow } from './types'
 
 
-const format = ({
+const mapStatement = ({
   readPath,
   writePath
-}: FormatInputs): void => {
+}: MapperInputs): void => {
 
   const writeAccess = fs.createWriteStream(writePath)
 
@@ -31,4 +31,4 @@ const format = ({
     .on('end', () => process.exit());
 }
 
-export default format
+export default mapStatement
