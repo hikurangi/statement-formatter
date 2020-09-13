@@ -1,6 +1,6 @@
 interface KiwibankCSVRow {
   'Account number': string;
-  'Date': string;
+  Date: string;
   'Memo/Description': string;
   'Source Code(payment type)': string;
   'TP ref': string;
@@ -13,8 +13,8 @@ interface KiwibankCSVRow {
   'OP Bank Account Number': string;
   'Amount(credit)': number;
   'Amount(debit)': number;
-  'Amount': number;
-  'Balance': number;
+  Amount: number;
+  Balance: number;
 }
 
 // https://central.xero.com/s/article/Import-a-CSV-bank-statement#Preparethedatainthefile
@@ -24,18 +24,18 @@ interface XeroCSVRow {
   Payee: string;
   Description: string;
   Reference: string;
-  'Analysis code': string;
-  'Transaction Type': string;
+  'Analysis code'?: string;
+  'Transaction Type'?: string;
   'Cheque number'?: string; // ?
 }
 
-interface FormatInputs {
+interface MapperInputs {
   readPath: string;
   writePath: string;
 }
 
 export {
-  FormatInputs,
+  MapperInputs,
   KiwibankCSVRow,
   XeroCSVRow
 }
