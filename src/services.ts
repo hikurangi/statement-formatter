@@ -29,7 +29,6 @@ const getCellValue = (keys: (keyof KiwibankCSVRow)[], row: KiwibankCSVRow): stri
 
 const getPayee = (row: KiwibankCSVRow): string => getCellValue(payeeKeys, row)
 const getReference = (row: KiwibankCSVRow): string => getCellValue(referenceKeys, row)
-
 export {
   getPayee,
   getReference
