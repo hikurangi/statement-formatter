@@ -34,8 +34,42 @@ interface MapperInputs {
   writePath: string;
 }
 
+type KiwibankXLSXStatementLine = [
+  string, // Date
+  string, // Payee
+  null | number, // Withdrawals
+  null | number, // Deposits
+  number // Balance
+]
+
+type KiwibankXLSXReferenceLine = [
+  string, // Date
+  string // Reference
+]
+
+type AccountHeader = [
+  string
+]
+
+// PageEnd also matches AccountHeader
+type PageEnd = [
+  null,
+  null,
+  null,
+  null,
+  string
+]
+
+type KiwibankXLSXRow = 
+  KiwibankXLSXStatementLine
+  | KiwibankXLSXReferenceLine
+  | AccountHeader
+  | PageEnd
+
+
 export {
   MapperInputs,
   KiwibankCSVRow,
+  KiwibankXLSXRow,
   XeroCSVRow
 }
