@@ -1,6 +1,7 @@
 import { KiwibankXLSXRow } from '../types'
 import {
-  getIsAccountSeparatorRow,
+  getAccountDetailsFromHeader,
+  getIsAccountHeader,
   getIsPageEndRow,
   // mergeReferenceRows
 } from '.'
@@ -8,18 +9,18 @@ import {
 test('Can accurately identify an Account Separator row', () => {
   const sampleRow = ["Account Name:                                   H J SIMPSON-BOUVIER\r\nProduct Name:                                    BIG-FUN MONEY LORDS\r\nPersonalised Name:                           FLAT\r\nAccount Number:                                  12-3456-7891011-12\r\nStatement Period:                              2 January 1985 to 21 February 2076"]
 
-  expect(getIsAccountSeparatorRow(sampleRow)).toBeTruthy();
+  expect(getIsAccountHeader(sampleRow)).toBeTruthy();
 });
 
 test('Can accurately identify an Account Separator row which is missing a Personalised Name', () => {
   const sampleRow = ["Account Name:                                   H J SIMPSON-BOUVIER\r\nProduct Name:                                    BIG-FUN MONEY LORDS\r\nAccount Number:                                  12-3456-7891011-12\r\nStatement Period:                              2 January 1985 to 21 February 2076"]
 
-  expect(getIsAccountSeparatorRow(sampleRow)).toBeTruthy();
+  expect(getIsAccountHeader(sampleRow)).toBeTruthy();
 });
 
 test('Does not wrongly identify a non-Account Separator Row', () => {
   const sampleRow = ["10 Dec"]
-  expect(getIsAccountSeparatorRow(sampleRow)).toBeFalsy();
+  expect(getIsAccountHeader(sampleRow)).toBeFalsy();
 })
 
 test('Can accurately identify a page-end row', () => {
@@ -28,11 +29,47 @@ test('Can accurately identify a page-end row', () => {
   ]
 
   expect(getIsPageEndRow(sampleRow)).toBeTruthy();
-});
+})
 
-test('Does not wrongly identify a non-Account Separator Row', () => {
-  const sampleRow = ["10 Dec"]
-  expect(getIsAccountSeparatorRow(sampleRow)).toBeFalsy();
+// test('Can accurately identify a page-end row full of nulls', () => {
+//   const sampleRow = [
+//     null,
+//     null,
+//     null,
+//     null,
+//     "Page 3 of 3 (Please turn over)"
+//   ]
+
+//   expect(getIsPageEndRow(sampleRow)).toBeTruthy();
+// })
+
+test('Can extract details from account header', () => {
+  const sampleRow = ["Account Name:                                   H J SIMPSON-BOUVIER\r\nProduct Name:                                    BIG-FUN MONEY LORDS\r\nPersonalised Name:                           FLAT\r\nAccount Number:                                  12-3456-7891011-12\r\nStatement Period:                              14 January 2076 to 21 February 2076"]
+
+  const expected = {
+    'Account Name': 'H J SIMPSON-BOUVIER',
+    'Product Name': 'BIG-FUN MONEY LORDS',
+    'Personalised Name': 'FLAT',
+    'Account Number': '12-3456-7891011-12',
+    'Statement Period': '14 January 2076 to 21 February 2076',
+    'Statement Year': 2076
+  }
+
+  expect(getAccountDetailsFromHeader(sampleRow)).toEqual(expected);
+})
+
+test('Can extract details from account header which is missing a Personalised Name', () => {
+  const sampleRow = ["Account Name:                                   H J SIMPSON-BOUVIER\r\nProduct Name:                                    BIG-FUN MONEY LORDS\r\nAccount Number:                                  12-3456-7891011-12\r\nStatement Period:                              14 January 2076 to 21 February 2076"]
+
+  const expected = {
+    'Account Name': 'H J SIMPSON-BOUVIER',
+    'Product Name': 'BIG-FUN MONEY LORDS',
+    'Account Number': '12-3456-7891011-12',
+    'Statement Period': '14 January 2076 to 21 February 2076',
+    'Statement Year': 2076
+  }
+
+  expect(getAccountDetailsFromHeader(sampleRow)).toEqual(expected);
 })
 
 // test('Merges reference rows appropriately', () => {
