@@ -4,20 +4,35 @@ import xlsx from 'node-xlsx'
 import { XeroCSVRow } from './types'
 import {
   getIsAccountSeparatorRow,
-  getIsPageEndRow,
-  headerRow
+  // getIsPageEndRow,
+  // headerRow
 } from './kiwibank'
 import { accountNumberRegex } from './constants'
 
+// Parameters
 const FILE_NAME = '2013-Dec-31_Personal (1)-converted.xlsx'
 const file = path.join(__dirname, '..', 'assets', 'xlsx', FILE_NAME)
-
 
 // should return an array to be handled (written to the filesystem, for example) elsewhere
 const parseXLSX = () => {
 
+  // Combine all pages
   const pages = xlsx.parse(fs.readFileSync(file));
   const rows = pages.reduce((allPages, page) => allPages.concat(page.data), [])
+
+  // 0. do a formatting pass
+  const formatted = rows.reduce((selectedRows, currentRow, index) => {
+    if (getIsAccountSeparatorRow(currentRow) === true) {
+
+    }
+  }, {})
+  // 1. get account separator row
+  // 2. get account number and year from that
+  // a. check that from + to years are the same
+  // b. if not the same, throw and error
+  // 3. get/double check header row (hard coded or live?)
+  // 4. format row as proper Xero row, including
+  // 5. do a row-merge checkahead
 
   const accounts = new Map<string, XeroCSVRow[]>()
 
@@ -47,11 +62,7 @@ const parseXLSX = () => {
   console.log(JSON.stringify(rows, null, 2))
 }
 
-export {
-  getIsAccountSeparatorRow,
-  getIsPageEndRow,
-  parseXLSX
-}
+export default parseXLSX
 
 // if a row has only two entries, (date and reference) then it is a reference for the previous row
 // confirm this by matching its date to the date from the previous row

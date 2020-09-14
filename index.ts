@@ -1,6 +1,6 @@
 import * as path from 'path'
 import mapStatement from './src/map-statement'
-import { parseXLSX } from './src/parse-xlsx'
+import parseXLSX from './src/parse-xlsx'
 
 const FILE_NAME = 'test'
 const readPath = path.resolve(__dirname, 'assets', 'csv', `${FILE_NAME}.CSV`)
