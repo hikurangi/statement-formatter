@@ -113,8 +113,8 @@ dist
 # Js files since we're using TS
 *.js
 
-# Explicitly keep Babel config (unnecessary but safer)
-!babel.config.js
+# ...however, explicitly keep programmatic JS config files
+!*.config.js
 
 # macOS
 .DS_Store
