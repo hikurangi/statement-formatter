@@ -17,6 +17,16 @@ interface KiwibankCSVRow {
   Balance: number;
 }
 
+interface KiwibankAccountDetails {
+  'Account Name': string;
+  'Product Name': string;
+  'Personalised Name'?: string;
+  'Account Number': string;
+  'Statement Period': string;
+  // NOTE: We are assuming a statement cannot cross a calendar year
+  'Statement Year': number;
+}
+
 // https://central.xero.com/s/article/Import-a-CSV-bank-statement#Preparethedatainthefile
 interface XeroCSVRow {
   Date: string;
@@ -69,6 +79,7 @@ type KiwibankXLSXRow =
 
 export {
   MapperInputs,
+  KiwibankAccountDetails,
   KiwibankCSVRow,
   KiwibankXLSXRow,
   XeroCSVRow
