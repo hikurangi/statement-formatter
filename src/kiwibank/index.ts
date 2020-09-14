@@ -13,16 +13,16 @@ const getIsPageEndRow = (row: string[]) => row?.length === 1
   ? pageEndRegex.test(row[0])
   : false
 
-const mergeReferenceRows = (section: KiwibankXLSXRow[]): KiwibankXLSXRow[] => {
-  let merged: KiwibankXLSXRow[] = []
+// const mergeReferenceRows = (section: KiwibankXLSXRow[]): KiwibankXLSXRow[] => {
+//   let merged: KiwibankXLSXRow[] = []
   
-  for (let i = 0; i < section.length; i++) {
-    const currentRow = section[i];
+//   for (let i = 0; i < section.length; i++) {
+//     const currentRow = section[i];
     
-  }
-  // iterate through all the available rows
-  return merged
-}
+//   }
+//   // iterate through all the available rows
+//   return merged
+// }
 
 const headerRow = [
   'Date',
@@ -36,5 +36,5 @@ export {
   getIsAccountSeparatorRow,
   getIsPageEndRow,
   headerRow,
-  mergeReferenceRows
+  // mergeReferenceRows
 }

@@ -2,7 +2,7 @@ import { KiwibankXLSXRow } from '../types'
 import {
   getIsAccountSeparatorRow,
   getIsPageEndRow,
-  mergeReferenceRows
+  // mergeReferenceRows
 } from '.'
 
 test('Can accurately identify an Account Separator row', () => {
@@ -35,55 +35,55 @@ test('Does not wrongly identify a non-Account Separator Row', () => {
   expect(getIsAccountSeparatorRow(sampleRow)).toBeFalsy();
 })
 
-test('Merges reference rows appropriately', () => {
-  const sampleSection: KiwibankXLSXRow[] = [[
-    "17 Nov",
-    "Money in from ol' mate",
-    null,
-    128.67,
-    132.36
-  ],
-  [
-    "17 Nov",
-    "Ref: Tent"
-  ]]
+// test('Merges reference rows appropriately', () => {
+//   const sampleSection: KiwibankXLSXRow[] = [[
+//     "17 Nov",
+//     "Money in from ol' mate",
+//     null,
+//     128.67,
+//     132.36
+//   ],
+//   [
+//     "17 Nov",
+//     "Ref: Tent"
+//   ]]
 
-  const expected = [
-    [
-      "17 Nov",
-      "Money in from ol' mate",
-      null,
-      128.67,
-      132.36,
-      "Ref: Tent"
-    ]
-  ]
-  expect(mergeReferenceRows(sampleSection)).toEqual(expected);
-})
+//   const expected = [
+//     [
+//       "17 Nov",
+//       "Money in from ol' mate",
+//       null,
+//       128.67,
+//       132.36,
+//       "Ref: Tent"
+//     ]
+//   ]
+//   expect(mergeReferenceRows(sampleSection)).toEqual(expected);
+// })
 
-test('Does not merge unrelated reference rows', () => {
-  const sampleSection: KiwibankXLSXRow[] = [[
-    "17 Nov",
-    "Money in from ol' mate",
-    null,
-    128.67,
-    132.36
-  ],
-  [
-    "18 Nov",
-    "Ref: Tent"
-  ]]
+// test('Does not merge unrelated reference rows', () => {
+//   const sampleSection: KiwibankXLSXRow[] = [[
+//     "17 Nov",
+//     "Money in from ol' mate",
+//     null,
+//     128.67,
+//     132.36
+//   ],
+//   [
+//     "18 Nov",
+//     "Ref: Tent"
+//   ]]
 
-  const expected = [[
-    "17 Nov",
-    "Money in from ol' mate",
-    null,
-    128.67,
-    132.36
-  ],
-  [
-    "18 Nov",
-    "Ref: Tent"
-  ]]
-  expect(mergeReferenceRows(sampleSection)).toEqual(expected);
-})
+//   const expected = [[
+//     "17 Nov",
+//     "Money in from ol' mate",
+//     null,
+//     128.67,
+//     132.36
+//   ],
+//   [
+//     "18 Nov",
+//     "Ref: Tent"
+//   ]]
+//   expect(mergeReferenceRows(sampleSection)).toEqual(expected);
+// })
