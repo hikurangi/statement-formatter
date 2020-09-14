@@ -1,3 +1,5 @@
+import { KiwibankXLSXRow } from '../types'
+
 // Kiwibank
 const accountSeparatorRegex = /Account Name:\s+(.+)\r\nProduct Name:\s+(.+)\r\n(Personalised Name:\s+(.+)\r\n)?Account Number:\s+(\d\d-\d{4}-\d{7}-\d\d)\r\nStatement Period:\s+\d{1,2} \w+ \d{4} to \d{1,2} \w+ \d\d\d\d/i
 
@@ -11,6 +13,17 @@ const getIsPageEndRow = (row: string[]) => row?.length === 1
   ? pageEndRegex.test(row[0])
   : false
 
+const mergeReferenceRows = (section: KiwibankXLSXRow[]): KiwibankXLSXRow[] => {
+  let merged: KiwibankXLSXRow[] = []
+  
+  for (let i = 0; i < section.length; i++) {
+    const currentRow = section[i];
+    
+  }
+  // iterate through all the available rows
+  return merged
+}
+
 const headerRow = [
   'Date',
   'Transaction',
@@ -22,5 +35,6 @@ const headerRow = [
 export {
   getIsAccountSeparatorRow,
   getIsPageEndRow,
-  headerRow
+  headerRow,
+  mergeReferenceRows
 }
