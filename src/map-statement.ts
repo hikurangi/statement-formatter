@@ -10,6 +10,12 @@ const mapStatement = ({
 }: MapperInputs): void => {
 
   const writeAccess = fs.createWriteStream(writePath)
+  
+  // fail gracefully but silently for now
+  if (fs.existsSync(readPath) === false) {
+    console.info(`Input file at ${readPath} does not exist.`)
+    return
+  }
 
   fs.createReadStream(readPath)
     .pipe(csv.parse({ headers: true }))
@@ -28,7 +34,7 @@ const mapStatement = ({
       'Transaction Type': ''
     }))
     .pipe(writeAccess)
-    .on('end', () => process.exit());
+    .on('end', process.exit);
 }
 
 export default mapStatement
