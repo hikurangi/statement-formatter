@@ -4,7 +4,7 @@ import { getPayee, getReference } from './services'
 import { MapperInputs, KiwibankCSVRow, XeroCSVRow } from './types'
 
 // should return an array to be handled elsewhere
-const mapStatement = ({
+const transformCSV = ({
   readPath,
   writePath
 }: MapperInputs): void => {
@@ -37,4 +37,4 @@ const mapStatement = ({
     .on('end', process.exit);
 }
 
-export default mapStatement
+export default transformCSV

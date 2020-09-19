@@ -3,11 +3,11 @@ import { KiwibankXLSXRow, KiwibankAccountDetails } from '../types'
 // Kiwibank
 const accountSeparatorRegex = /(Account Name):\s+(.+)\r\n(Product Name):\s+(.+)\r\n((Personalised Name):\s+(.+)\r\n)?(Account Number):\s+(\d\d-\d{4}-\d{7}-\d\d)\r\n(Statement Period):\s+(\d{1,2} \w+ \d{4} to \d{1,2} \w+ \d{4})/i
 
-const getIsAccountHeader = (row: KiwibankXLSXRow[]) => row?.length === 1
+const getIsAccountHeader = (row: Array< KiwibankXLSXRow>) => row?.length === 1
   ? accountSeparatorRegex.test(row[0])
   : false
 
-const getAccountDetailsFromHeader = (details: KiwibankXLSXRow[]): KiwibankAccountDetails => {
+const getAccountDetailsFromHeader = (details: Array<KiwibankXLSXRow>): KiwibankAccountDetails => {
   const output: KiwibankAccountDetails = {
     'Account Name': '',
     'Product Name': '',
@@ -45,7 +45,7 @@ const getAccountDetailsFromHeader = (details: KiwibankXLSXRow[]): KiwibankAccoun
 
 const pageEndRegex = /Page \d{1,2} of \d{1,2} \(Please turn over\)/
 
-const getIsPageEndRow = (row: string[]) => row?.length === 1
+const getIsPageEndRow = (row: Array<string>) => row?.length === 1
   ? pageEndRegex.test(row[0])
   : false
 

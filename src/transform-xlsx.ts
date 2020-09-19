@@ -10,18 +10,7 @@ import {
 } from './kiwibank'
 import { accountNumberRegex } from './constants'
 
-// Parameters
-const FILE_NAME = '2013-Dec-31_Personal (1)-converted.xlsx'
-const file = path.join(__dirname, '..', 'assets', 'xlsx', FILE_NAME)
-
-// should return an array to be handled (written to the filesystem, for example) elsewhere
-const parseXLSX = () => {
-  // Combine all pages
-  const pages = xlsx.parse(fs.readFileSync(file));
-  const rows = pages.reduce((allPages, page) => allPages.concat(page.data), [])
-
-  // const accounts = new Map<string, XeroCSVRow[]>()
-
+const transformXLSX = (rows: Array<XeroCSVRow>) => {
   for (let i = 0; i < rows.length; i++) {
     const currentRow = rows[i]
 
@@ -44,7 +33,7 @@ const parseXLSX = () => {
   // console.log(JSON.stringify(rows, null, 2))
 }
 
-export default parseXLSX
+export default transformXLSX
 
 // if a row has only two entries, (date and reference) then it is a reference for the previous row
 // confirm this by matching its date to the date from the previous row
