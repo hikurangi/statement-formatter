@@ -103,12 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
-# CSV files
+# Assets, imports, compiled
 *.csv
-*.CSV
-
-# XLSX files
 *.xlsx
+*.pdf
+output/**
 
 # Js files since we're using TS
 *.js
