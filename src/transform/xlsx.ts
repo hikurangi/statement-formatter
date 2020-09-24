@@ -1,14 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 import xlsx from 'node-xlsx'
-import { XeroCSVRow } from './types'
+import { XeroCSVRow } from '../types'
 import {
   // getIsPageEndRow,
   // headerRow,
   getIsAccountHeader,
   getAccountDetailsFromHeader
-} from './kiwibank'
-import { accountNumberRegex } from './constants'
+} from '../kiwibank'
 
 const transformXLSX = (rows: Array<XeroCSVRow>) => {
   for (let i = 0; i < rows.length; i++) {
@@ -18,7 +17,7 @@ const transformXLSX = (rows: Array<XeroCSVRow>) => {
     if (getIsAccountHeader(currentRow) === true) {
       // 2. get account header details
       const currentAccountDetails = getAccountDetailsFromHeader(currentRow)
-      console.log({currentAccountDetails})
+      // console.log({currentAccountDetails})
 
       // 3. get/double check header row (hard coded or live?)
       // 4. format row as proper Xero row, including
@@ -26,7 +25,7 @@ const transformXLSX = (rows: Array<XeroCSVRow>) => {
     }
 
   }
-  // const accountSeparatorRows = rows.filter(getIsAccountHeader)
+  const accountSeparatorRows = rows.filter(getIsAccountHeader)
 
   // console.log(accounts.keys())
   // console.log(JSON.stringify(accountSeparatorRows, null, 2))
