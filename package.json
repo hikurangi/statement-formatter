@@ -4,7 +4,7 @@
   "description": "Format Kiwibank CSVs and PDFs to CSV.",
   "main": "index.js",
   "scripts": {
-    "start:dev": "npm run compile:dev & nodemon",
+    "start:dev": "npm run compile:dev & nodemon --ignore assets --ignore output",
     "start": "npm run compile & node ./index.js",
     "test": "jest",
     "test:watch": "jest --watch",
