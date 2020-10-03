@@ -1,11 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import pdf from 'pdf-parse'
-import { XeroCSVRow } from '../types'
-
-const FILE_NAME = '2013-Nov-01_Personal'
-const filePath = path.join(__dirname, '..', '..', 'assets', 'pdf', `${FILE_NAME}.pdf`)
-let dataBuffer = fs.readFileSync(filePath)
+import { XeroCSVRow, XeroFormattedStatement } from '../types'
 
 const SEPARATOR = ' ^!^ '
 
@@ -98,36 +94,36 @@ const options = {
 
         const partiallyFormattedRows: Array<FormattedRow> = []
 
-        adjustedRows.forEach(row => {
+        // adjustedRows.forEach(row => {
 
-          const updateRow = row.reduce((currentRow: FormattedRow, cell): FormattedRow => {
-            if (row.length < 4) {
-              return currentRow
-            }
+        //   const updateRow = row.reduce((currentRow: FormattedRow, cell): FormattedRow => {
+        //     if (row.length < 4) {
+        //       return currentRow
+        //     }
 
-            const xPosition = cell.transform[4]
+        //     const xPosition = cell.transform[4]
 
-            if (xPosition > 500) {
-              currentRow.Balance = cell.str
-            } else if (xPosition > 400) {
-              currentRow.Deposits = cell.str
-            } else if (xPosition > 300) {
-              currentRow.Withdrawals = cell.str
-            } else if (xPosition > 120) {
-              currentRow.Transaction = cell.str
-            } else if (xPosition > 50) {
-              currentRow.Date = cell.str
-            } else {
-              console.info(`Attribute '${cell.str}' is out of x-range`)
-            }
+        //     if (xPosition > 500) {
+        //       currentRow.Balance = cell.str
+        //     } else if (xPosition > 400) {
+        //       currentRow.Deposits = cell.str
+        //     } else if (xPosition > 300) {
+        //       currentRow.Withdrawals = cell.str
+        //     } else if (xPosition > 120) {
+        //       currentRow.Transaction = cell.str
+        //     } else if (xPosition > 50) {
+        //       currentRow.Date = cell.str
+        //     } else {
+        //       console.info(`Attribute '${cell.str}' is out of x-range`)
+        //     }
 
-            return currentRow
-          }, { })
+        //     return currentRow
+        //   }, { })
           
-          console.log({updateRow})
+        //   console.log({updateRow})
 
-          partiallyFormattedRows.push(updateRow)
-        })
+        //   partiallyFormattedRows.push(updateRow)
+        // })
 
         // const xeroRows = adjustedRows.map((row: Array<PdfItem>): Array<FormattedRow> => row.reduce((row: FormattedRow, cell): FormattedRow => {
         //   const xPosition = cell.transform[4]
@@ -159,7 +155,7 @@ const options = {
 }
 
 
-const transformPDF = () => {
+const transformPDF = (dataBuffer: Buffer): XeroFormattedStatement => {
   pdf(dataBuffer, options).then(data => {
     console.log({data})
     // // number of pages
@@ -175,8 +171,12 @@ const transformPDF = () => {
     // console.log(data.version);
     // // PDF text
     // console.log(data.text);
+    
+    })
+    
+    const test: XeroFormattedStatement = new Map([['1234', []]])
 
-  })
+    return test
 }
 
 export default transformPDF

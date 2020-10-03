@@ -76,11 +76,13 @@ type KiwibankXLSXRow =
   | AccountHeader
   | PageEnd
 
+type XeroFormattedStatement = Map<string, Array<XeroCSVRow>>
 
 export {
   MapperInputs,
   KiwibankAccountDetails,
   KiwibankCSVRow,
   KiwibankXLSXRow,
-  XeroCSVRow
+  XeroCSVRow,
+  XeroFormattedStatement
 }

@@ -17,7 +17,7 @@ transformCSV({ readPath, writePath })
 // Parameters
 const XLSX_FILE_NAME = '2013-Dec-31_Personal (1)-converted.xlsx'
 const file = path.join(__dirname, 'assets', 'xlsx', XLSX_FILE_NAME)
-]
+
 // Combine all pages
 const pages = xlsx.parse(fs.readFileSync(file));
 const rows: XeroCSVRow[] = pages.reduce((allPages, page) => allPages.concat(page.data), [])
@@ -25,4 +25,9 @@ const rows: XeroCSVRow[] = pages.reduce((allPages, page) => allPages.concat(page
 // should return an array to be handled (written to the filesystem, for example) elsewhere
 transformXLSX(rows)
 
-transformPDF()
+const PDF_FILE_NAME = '2013-Nov-01_Personal'
+const pdfFilePath = path.join(__dirname, 'assets', 'pdf', `${PDF_FILE_NAME}.pdf`)
+let dataBuffer = fs.readFileSync(pdfFilePath)
+
+const result = transformPDF(dataBuffer)
+console.log({result})
