@@ -4,7 +4,7 @@
   "description": "Format Kiwibank CSVs and PDFs to CSV.",
   "main": "index.js",
   "scripts": {
-    "start:dev": "npm run compile:dev & nodemon",
+    "start:dev": "npm run compile:dev & nodemon --ignore assets --ignore output",
     "start": "npm run compile & node ./index.js",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -15,8 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/node-xlsx": "^0.15.0",
+    "@types/pdf-parse": "^1.1.0",
     "fast-csv": "^4.3.2",
-    "node-xlsx": "^0.15.0"
+    "node-xlsx": "^0.15.0",
+    "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

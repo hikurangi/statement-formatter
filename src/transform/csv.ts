@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as csv from 'fast-csv'
-import { getPayee, getReference } from './services'
-import { MapperInputs, KiwibankCSVRow, XeroCSVRow } from './types'
+import { getPayee, getReference } from '../helpers'
+import { MapperInputs, KiwibankCSVRow, XeroCSVRow } from '../types'
 
 // should return an array to be handled elsewhere
 const transformCSV = ({
