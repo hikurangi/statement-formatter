@@ -1,8 +1,5 @@
 open System.IO
 
-let uri =
-    ""
-
 let getDateFromRow (str: string) =
     str.Split(',')
     |> Seq.tryItem 1
@@ -23,6 +20,7 @@ let writeFile headers chunk =
         (Directory.GetParent(__SOURCE_DIRECTORY__).FullName
          |> Directory.GetParent)
             .FullName
+
     let fullPath =
         Path.Combine(baseDirectory, "output", fileName)
 
@@ -33,13 +31,14 @@ let writeFile headers chunk =
 [<EntryPoint>]
 let main _argv =
     // TODO:
-    // - pull file location from args
     // - handle errors in this regard
     // - supply output destination
-    // - optimise for performance -> laziness
+    // - optimise for performance with laziness
     // - decouple input and output sources from main program - split into different apps?
     // - actually parse CSV so we can tweak the headers
 
+    // - (see immediately below) pull file location from args
+    let uri = ""
     let sr = new StreamReader(uri)
     let headers = sr.ReadLine()
 
