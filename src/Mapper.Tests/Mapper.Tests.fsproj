@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Formatter\Formatter.fsproj" />
+    <ProjectReference Include="..\Mapper\Mapper.fsproj" />
   </ItemGroup>
 
 </Project>

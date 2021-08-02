@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Formatter.fs" />
-    <Compile Include="Reader.fs" />
+    <Compile Include="Library.fs" />
   </ItemGroup>
 
 </Project>

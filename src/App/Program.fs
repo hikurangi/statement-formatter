@@ -1,32 +1,5 @@
 open System.IO
-
-let getDateFromRow (str: string) =
-    str.Split(',')
-    |> Seq.tryItem 1
-    |> function
-        | Some d -> d
-        | None -> failwith "Date was missing from row"
-
-let writeFile headers chunk =
-    let fileString =
-        chunk
-        |> Seq.fold (fun s r -> s + "\n" + r) headers
-
-    let startDate = chunk |> Seq.head |> getDateFromRow
-    let endDate = chunk |> Seq.last |> getDateFromRow
-    let fileName = $"{startDate} to {endDate}.csv"
-
-    let baseDirectory =
-        (Directory.GetParent(__SOURCE_DIRECTORY__).FullName
-         |> Directory.GetParent)
-            .FullName
-
-    let fullPath =
-        Path.Combine(baseDirectory, "output", fileName)
-
-    let sw = new StreamWriter(fullPath)
-    sw.Write fileString
-    sw.Close()
+open Helpers
 
 [<EntryPoint>]
 let main _argv =
@@ -38,15 +11,18 @@ let main _argv =
     // - actually parse CSV so we can tweak the headers
 
     // - (see immediately below) pull file location from args
-    let uri = ""
+    let uri =
+        "/Users/Hikurangi/Desktop/csv/38-9012-0507117-00_17Jun - 06-03-2012 to 17-06-2021.csv"
+
     let sr = new StreamReader(uri)
     let headers = sr.ReadLine()
 
     sr.ReadToEnd().Split('\n')
     |> Seq.tail // skip the header row
-    |> Seq.chunkBySize 1000
+    |> Seq.chunkBySize 999 // plus header row is 1000 total
     |> Seq.map List.ofArray
     |> Seq.iter (writeFile headers)
 
     sr.Close()
+
     0
