@@ -103,18 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# Assets, imports, compiled
-*.csv
-*.xlsx
-*.pdf
-output/**
-
-# Js files since we're using TS
-*.js
-
-# ...however, explicitly keep programmatic JS config files
-!*.config.js
-
 # macOS
 .DS_Store
 
@@ -565,3 +553,16 @@ $RECYCLE.BIN/
 bin/
 obj/
 assets/csv/
+
+# Assets, imports, compiled
+*.csv
+!*-sample.csv
+*.xlsx
+*.pdf
+output/**
+
+# Js files since we're using TS
+*.js
+
+# ...however, explicitly keep programmatic JS config files
+!*.config.js
