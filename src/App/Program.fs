@@ -1,6 +1,8 @@
 open System.IO
 open Helpers
+open Mapper
 
+/// <summary>We're handling all the IO out here. Everything else lives inside</summary>
 [<EntryPoint>]
 let main _argv =
     // TODO:
@@ -14,15 +16,17 @@ let main _argv =
     let uri =
         "/Users/Hikurangi/Desktop/csv/38-9012-0507117-00_17Jun - 06-03-2012 to 17-06-2021.csv"
 
+    // 1. Read file in (based on supplied arg) -> later
     let sr = new StreamReader(uri)
-    let headers = sr.ReadLine()
+    // let headers = sr.ReadLine()
 
-    sr.ReadToEnd().Split('\n')
-    |> Seq.tail // skip the header row
-    |> Seq.chunkBySize 999 // plus header row is 1000 total // TODO: the final chunk has an empty string at the end - remove this
-    |> Seq.map List.ofArray
-    |> Seq.iter (writeFile headers)
+    let transformed = sr.ReadToEnd() |> Transformer.transform
+    
+    // 2. Chunk file into correct sizes
+    let chunks = transformed |> Seq.chunkBySize 999 // plus header row is 1000 total // TODO: the final chunk has an empty string at the end - remove it
 
+    // 3. Write chunks to files
+    // chunks |> Seq.iter (writeFile headers)
     sr.Close()
 
     0

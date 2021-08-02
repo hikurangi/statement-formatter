@@ -7,4 +7,7 @@
     <Compile Include="Helpers.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mapper\Mapper.fsproj" />
+  </ItemGroup>
 </Project>
