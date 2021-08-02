@@ -1,2 +1,2 @@
 # statement-formatter
-A small Node/TS tool for formatting bank statements.
+An F#-based tool manipulating bank statements.

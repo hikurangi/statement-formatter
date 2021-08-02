@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F0BBA2B0-7A33-4B4C-99D7-6D94F35F5367}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "src\App\App.fsproj", "{24406445-D667-4467-BCED-AF88E7912825}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Mapper", "src\Mapper\Mapper.fsproj", "{4FDE588A-D2CB-486D-B25F-08AB260067D8}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Mapper.Tests", "src\Mapper.Tests\Mapper.Tests.fsproj", "{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24406445-D667-4467-BCED-AF88E7912825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Debug|x64.Build.0 = Debug|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Debug|x86.Build.0 = Debug|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Release|x64.ActiveCfg = Release|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Release|x64.Build.0 = Release|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Release|x86.ActiveCfg = Release|Any CPU
+		{24406445-D667-4467-BCED-AF88E7912825}.Release|x86.Build.0 = Release|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Debug|x64.Build.0 = Debug|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Debug|x86.Build.0 = Debug|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Release|x64.ActiveCfg = Release|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Release|x64.Build.0 = Release|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8}.Release|x86.Build.0 = Release|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Debug|x64.Build.0 = Debug|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Debug|x86.Build.0 = Debug|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Release|x64.ActiveCfg = Release|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Release|x64.Build.0 = Release|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Release|x86.ActiveCfg = Release|Any CPU
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{24406445-D667-4467-BCED-AF88E7912825} = {F0BBA2B0-7A33-4B4C-99D7-6D94F35F5367}
+		{4FDE588A-D2CB-486D-B25F-08AB260067D8} = {F0BBA2B0-7A33-4B4C-99D7-6D94F35F5367}
+		{92A38E47-41F3-42D7-9C2D-70BAE2BC2E9F} = {F0BBA2B0-7A33-4B4C-99D7-6D94F35F5367}
+	EndGlobalSection
+EndGlobal

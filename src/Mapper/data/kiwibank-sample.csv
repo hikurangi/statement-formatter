@@ -1,0 +1,9 @@
+Account number,Date,Memo/Description,Source Code (payment type),TP ref,TP part,TP code,OP ref,OP part,OP code,OP name,OP Bank Account Number,Amount (credit),Amount (debit),Amount,Balance
+77-1111-1111111-00,17-04-2018,UBER BV 800-592-8996 ;,,,,,,,,,,,34.49,-34.49,100.97
+77-1111-1111111-00,17-04-2018,POS W/D MR GO'S MR GO-20:49 ;,,,,,,,,,,,73.00,-73.00,27.97
+77-1111-1111111-00,18-04-2018,UBER BV 800-592-8996 ;,,,,,,,,,,,7.19,-7.19,20.78
+77-1111-1111111-00,18-04-2018,Direct Credit Nice drummin MS J L HOOPER ;Ref: Nice drummin MS J L HOOPER,DC,,Nice drummin,,,,,MS J L HOOPER,12-3456-7891011-12,75.00,,75.00,95.78
+77-1111-1111111-00,18-04-2018,POS W/D VICTORIA STRE-14:09 ;,,,,,,,,,,,17.00,-17.00,78.78
+77-1111-1111111-00,18-04-2018,POS W/D MT VICTORIA F-17:47 ;,,,,,,,,,,,20.00,-20.00,58.78
+77-1111-1111111-00,18-04-2018,Direct Credit ffr ehsh 666 Lewis X V & Fi ;Ref: ffr ehsh 666 Lewis X V & Fi,DC,,ffr,ehsh 666,,,,Lewis X V & Fi,01-2345-6789101-11,50.00,,50.00,108.78
+77-1111-1111111-00,18-04-2018,TRANSFER FROM E H N SCHLESWIG-HALL - 01 ;,,,,,,,,E H N SCHLESWIG-HALL,77-1111-1111111-01,70.00,,70.00,178.78
