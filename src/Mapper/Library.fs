@@ -1,14 +1,18 @@
 ﻿namespace Mapper
 
-module Say =
-    let hello name =
-        printfn "Hello %s" name
+/// <summary>The Mapper's Transform method maps Kiwibank rows to Xero rows</summary>
+/// <returns>A stringified Xero-formatted CSV</returns>
+module Mapper =
+    open FSharp.Data
 
-// Memo/Description -> split at ;, first part is Description, second part is Reference
-// Date -> Date
-// Source Code (payment type) -> Transaction Type
-// Amount -> Amount
-// OP name -> Payee
+    type KiwibankAccount = CsvProvider<"data/kiwibank-sample.csv", HasHeaders=true>
+    type XeroAccount = CsvProvider<"data/xero-sample.csv", HasHeaders=true>
 
-// Cheque Number	Analysis code
-// TP ref	TP part	TP code	OP ref	OP part	OP code OP Bank Account Number 0
+    let public Transform rows = 
+      ""
+
+    // Memo/Description -> split at ;, first part is Description, second part is Reference
+    // Date -> Date
+    // Source Code (payment type) -> Transaction Type
+    // Amount -> Amount
+    // OP name -> Payee

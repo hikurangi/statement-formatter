@@ -19,7 +19,7 @@ let main _argv =
 
     sr.ReadToEnd().Split('\n')
     |> Seq.tail // skip the header row
-    |> Seq.chunkBySize 999 // plus header row is 1000 total
+    |> Seq.chunkBySize 999 // plus header row is 1000 total // TODO: the final chunk has an empty string at the end - remove this
     |> Seq.map List.ofArray
     |> Seq.iter (writeFile headers)
 
