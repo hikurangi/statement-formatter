@@ -14,7 +14,7 @@ let main _argv =
 
     // - (see immediately below) pull file location from args
     let uri =
-        "/Users/Hikurangi/Desktop/csv/38-9012-0507117-00_17Jun - 06-03-2012 to 17-06-2021.csv"
+        "/Users/Hikurangi/Desktop/38-9012-0507117-00_17Jun - 06-03-2012 to 17-06-2021.csv"
 
     // 1. Read file in (based on supplied arg) -> later
     let sr = new StreamReader(uri)
