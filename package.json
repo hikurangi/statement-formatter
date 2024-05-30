@@ -1,7 +1,7 @@
 {
   "name": "csv-formatter",
   "version": "1.0.0",
-  "description": "Format Kiwibank CSVs and PDFs to CSV.",
+  "description": "Format Kiwibank PDFs to CSV.",
   "main": "index.js",
   "scripts": {
     "start:dev": "npm run compile:dev & nodemon",
@@ -13,11 +13,6 @@
   },
   "author": "Hikurangi Schaverien-Kaa",
   "license": "ISC",
-  "dependencies": {
-    "@types/node-xlsx": "^0.15.0",
-    "fast-csv": "^4.3.2",
-    "node-xlsx": "^0.15.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
