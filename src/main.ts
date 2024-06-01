@@ -1,5 +1,4 @@
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
-// const exports = {}
 
 import splitWheneverInclusive from '../lib/splitWheneverInclusive'
 const pdfPath = process.argv[2] || './assets/test.pdf'
