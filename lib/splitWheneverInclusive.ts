@@ -1,34 +1,26 @@
-// from Ramda splitWhenever
-// https://github.com/ramda/ramda/blob/v0.30.0/source/splitWhenever.js
-import { append, head, splitWhen, tail } from 'ramda'
-
-const splitter = <T>(
-  acc: Array<Array<T>>,
-  targetList: Array<T>,
-  pred: (item: T) => boolean
-): Array<Array<T>> => {
-  if (targetList.length === 0) {
-    return acc
-  }
-
-  // iterate thru the target list, up to where the predicate is satisfied
-  const [currentChunkExclusive, remainingList] = splitWhen(pred, targetList)
-  if (remainingList.length === 0) {
-    return append(currentChunkExclusive, acc)
-  }
-
-  const currentChunkInclusive = append(
-    head(remainingList)!,
-    currentChunkExclusive
-  )
-
-  return splitter(append(currentChunkInclusive, acc), tail(remainingList), pred)
-}
 const splitWheneverInclusive = <T>(
-  pred: (item: T) => boolean,
-  list: Array<T>
+  predicate: (item: T) => boolean,
+  array: Array<T>
 ): Array<Array<T>> => {
-  return splitter([], list, pred)
+  // This devastatingly simple and straightforward solution brought to you by 4o
+  // https://chatgpt.com/share/1fec560e-eab4-408b-91f8-625cec3106ad
+  const result: Array<Array<T>> = []
+  let currentArray: Array<T> = []
+
+  for (const item of array) {
+    currentArray.push(item)
+    if (predicate(item)) {
+      result.push(currentArray)
+      currentArray = []
+    }
+  }
+
+  // If there are any remaining items in currentArray, add them as the last subarray
+  if (currentArray.length > 0) {
+    result.push(currentArray)
+  }
+
+  return result
 }
 
 export default splitWheneverInclusive

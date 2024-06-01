@@ -4,9 +4,6 @@ dependencies:
   pdfjs-dist:
     specifier: ^4.3.136
     version: 4.3.136
-  ramda:
-    specifier: ^0.30.0
-    version: 0.30.0
   zod:
     specifier: ^3.23.8
     version: 3.23.8
@@ -18,9 +15,6 @@ devDependencies:
   '@types/node':
     specifier: ^20.12.13
     version: 20.12.13
-  '@types/ramda':
-    specifier: ^0.30.0
-    version: 0.30.0
   jest:
     specifier: ^29.7.0
     version: 29.7.0(@types/node@20.12.13)
@@ -728,12 +722,6 @@ packages:
     resolution: {integrity: sha512-gBGeanV41c1L171rR7wjbMiEpEI/l5XFQdLLfhr/REwpgDy/4U8y89+i8kRiLzDyZdOkXh+cRaTetUnCYutoXA==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
-
-  /@types/ramda@0.30.0:
-    resolution: {integrity: sha512-DQtfqUbSB18iM9NHbQ++kVUDuBWHMr6T2FpW1XTiksYRGjq4WnNPZLt712OEHEBJs7aMyJ68Mf2kGMOP1srVVw==}
-    dependencies:
-      types-ramda: 0.30.0
     dev: true
 
   /@types/stack-utils@2.0.3:
@@ -2273,10 +2261,6 @@ packages:
     resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
     dev: true
 
-  /ramda@0.30.0:
-    resolution: {integrity: sha512-13Y0iMhIQuAm/wNGBL/9HEqIfRGmNmjKnTPlKWfA9f7dnDkr8d45wQ+S7+ZLh/Pq9PdcGxkqKUEA7ySu1QSd9Q==}
-    dev: false
-
   /react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
     dev: true
@@ -2582,10 +2566,6 @@ packages:
       yargs-parser: 21.1.1
     dev: true
 
-  /ts-toolbelt@9.6.0:
-    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
-    dev: true
-
   /tsc-watch@6.2.0(typescript@5.4.5):
     resolution: {integrity: sha512-2LBhf9kjKXnz7KQ/puLHlozMzzUNHAdYBNMkg3eksQJ9GBAgMg8czznM83T5PmsoUvDnXzfIeQn2lNcIYDr8LA==}
     engines: {node: '>=12.12.0'}
@@ -2608,12 +2588,6 @@ packages:
   /type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
-    dev: true
-
-  /types-ramda@0.30.0:
-    resolution: {integrity: sha512-oVPw/KHB5M0Du0txTEKKM8xZOG9cZBRdCVXvwHYuNJUVkAiJ9oWyqkA+9Bj2gjMsHgkkhsYevobQBWs8I2/Xvw==}
-    dependencies:
-      ts-toolbelt: 9.6.0
     dev: true
 
   /typescript@5.4.5:
