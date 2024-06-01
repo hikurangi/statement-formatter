@@ -1,31 +1,34 @@
-// from Ramda splitWhen
-// https://github.com/ramda/ramda/blob/v0.30.0/source/splitWhen.js
+// from Ramda splitWhenever
+// https://github.com/ramda/ramda/blob/v0.30.0/source/splitWhenever.js
+import { append, head, splitWhen, tail } from 'ramda'
+
+const splitter = <T>(
+  acc: Array<Array<T>>,
+  targetList: Array<T>,
+  pred: (item: T) => boolean
+): Array<Array<T>> => {
+  if (targetList.length === 0) {
+    return acc
+  }
+
+  // iterate thru the target list, up to where the predicate is satisfied
+  const [currentChunkExclusive, remainingList] = splitWhen(pred, targetList)
+  if (remainingList.length === 0) {
+    return append(currentChunkExclusive, acc)
+  }
+
+  const currentChunkInclusive = append(
+    head(remainingList)!,
+    currentChunkExclusive
+  )
+
+  return splitter(append(currentChunkInclusive, acc), tail(remainingList), pred)
+}
 const splitWheneverInclusive = <T>(
   pred: (item: T) => boolean,
   list: Array<T>
-) => {
-  var acc = []
-  var curr = []
-  for (var i = 0; i < list.length; i = i + 1) {
-    if (!pred(list[i])) {
-      // if the current list item does not satisfy the predicate
-      curr.push(list[i])
-    }
-
-    const nextItem = list[i + 1]
-
-    if (
-      ((i < list.length - 1 && pred(nextItem)) || i === list.length - 1) &&
-      curr.length > 0
-    ) {
-      if (typeof nextItem !== 'undefined') {
-        // this is the inclusive addition
-        acc.push([...curr, list[i + 1]])
-      }
-      curr = []
-    }
-  }
-  return acc
+): Array<Array<T>> => {
+  return splitter([], list, pred)
 }
 
 export default splitWheneverInclusive
