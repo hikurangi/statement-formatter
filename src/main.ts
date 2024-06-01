@@ -1,6 +1,6 @@
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 
-import splitWheneverInclusive from '../lib/splitWheneverInclusive'
+import splitWheneverInclusive from '../lib/splitWheneverInclusive.js'
 const pdfPath = process.argv[2] || './assets/test.pdf'
 
 // // Will be using promises to load document, pages and misc data instead of
@@ -39,15 +39,15 @@ const main = async () => {
               // iterate through list
               // first time: item has no
               // 1 - split 'items' by hasEOL - after each, begin a new array
-              //   const itemsSplitOnEOL = splitWheneverInclusive<Item>(
-              //     (item: Item) => 'hasEOL' in item && item.hasEOL === true,
-              //     content.items
-              //   )
-              //   // 2 - extract strings
-              //   const cleanList = itemsSplitOnEOL.map(row =>
-              //     row.map(cell => ('str' in cell ? cell.str : ''))
-              //   )
-              //   console.log({ cleanList })
+              const itemsSplitOnEOL = splitWheneverInclusive<Item>(
+                (item: Item) => 'hasEOL' in item && item.hasEOL === true,
+                content.items
+              )
+              // 2 - extract strings
+              const cleanList = itemsSplitOnEOL.map(row =>
+                row.map(cell => ('str' in cell ? cell.str : ''))
+              )
+              console.log({ cleanList })
               // Content contains lots of information about the text layout and
               // styles, but we need only strings at the moment
               //   const strings = content.items.map(item =>
