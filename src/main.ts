@@ -1,6 +1,6 @@
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 
-import splitWheneverInclusive from '../lib/splitWheneverInclusive.js'
+import splitWheneverInclusive from './lib/split-whenever-inclusive.js'
 const pdfPath = process.argv[2] || './assets/test.pdf'
 
 // Will be using promises to load document, pages and misc data instead of

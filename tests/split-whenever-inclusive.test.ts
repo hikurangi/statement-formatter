@@ -1,4 +1,4 @@
-import splitWheneverInclusive from '../lib/splitWheneverInclusive'
+import splitWheneverInclusive from '../src/lib/split-whenever-inclusive'
 
 test('Splits as expected', () => {
   const list = [1, 5, 2, 2, 1, 1, 3, 1, 2, 1, 2]
