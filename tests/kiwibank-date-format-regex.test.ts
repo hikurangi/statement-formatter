@@ -29,13 +29,13 @@ describe('Date format regex', () => {
     new Date('2024-12-31')
   )
 
-  test.each(allValidDays)('%i should be valid', date => {
+  test.each(allValidDays)('%s should be valid', date => {
     expect(KIWIBANK_DATE_FORMAT_REGEX.test(date)).toEqual(true)
   })
 
   const invalidDays = ['30 Feb', '31 Sep', '32 May', '11 Noy']
 
-  test.each(invalidDays)('%i should not be valid', date => {
+  test.each(invalidDays)('%s should not be valid', date => {
     expect(KIWIBANK_DATE_FORMAT_REGEX.test(date)).toEqual(false)
   })
 })
