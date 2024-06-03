@@ -10,6 +10,9 @@ const splitWheneverBeforeInclusive = <T>(
       if (currentSubarray.length > 0) {
         result.push(currentSubarray)
       }
+      // initialise the next sub-array with
+      // the item which has just satisfied
+      // the predicate
       currentSubarray = [item]
     } else {
       currentSubarray.push(item)
