@@ -2,10 +2,19 @@
   "moduleFileExtensions": ["json", "ts", "js"],
   "rootDir": ".",
   "modulePaths": ["<rootDir>"],
+  "moduleNameMapper": {
+    "^(\\.{1,2}/.*)\\.js$": "$1"
+  },
   "testRegex": ".test.ts$",
   "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
+    "^.+\\.(t|j)s$": [
+      "ts-jest",
+      {
+        "useESM": true
+      }
+    ]
   },
   "coverageDirectory": "./coverage",
-  "testEnvironment": "node"
+  "testEnvironment": "node",
+  "extensionsToTreatAsEsm": [".ts"]
 }
