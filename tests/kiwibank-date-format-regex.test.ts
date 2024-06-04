@@ -1,4 +1,4 @@
-import KIWIBANK_DATE_FORMAT_REGEX from '../src/lib/kiwibank-date-format-regex'
+import { KIWIBANK_DATE_FORMAT_REGEX } from '../src/lib/kiwibank-date-format-regex'
 
 const generateRangeOfFormattedDates = (
   startDate: Date,
@@ -33,9 +33,9 @@ describe('Date format regex', () => {
     expect(KIWIBANK_DATE_FORMAT_REGEX.test(date)).toEqual(true)
   })
 
-  const invalidDays = ['30 Feb', '31 Sep', '32 May', '11 Noy']
+  const someInvalidDays = ['30 Feb', '31 Sep', '32 May', '11 Noy']
 
-  test.each(invalidDays)('%s should not be valid', date => {
+  test.each(someInvalidDays)('%s should not be valid', date => {
     expect(KIWIBANK_DATE_FORMAT_REGEX.test(date)).toEqual(false)
   })
 })

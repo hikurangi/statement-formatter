@@ -1,9 +1,10 @@
 import { z } from 'zod'
-import KIWIBANK_DATE_FORMAT_REGEX from '../lib/kiwibank-date-format-regex.js'
+import { KIWIBANK_DATE_FORMAT_REGEX } from '../lib/kiwibank-date-format-regex'
 import {
   CURRENCY_REGEX_SIGNED,
   CURRENCY_REGEX_UNSIGNED,
-} from '../lib/currency-regex.js'
+} from '../lib/currency-regex'
+import { takeLast } from 'ramda'
 
 const EmptySpaceStringZ = z.literal(' ')
 export const CurrencyStringUnsignedZ = z.string().regex(CURRENCY_REGEX_UNSIGNED)
@@ -25,3 +26,13 @@ export const KiwibankStandardRowEndingZ = z.tuple([
   EmptySpaceStringZ,
   CurrencyStringSignedZ,
 ])
+
+export const isStandardKiwibankRow = (item: any) => {
+  if (!Array.isArray(item) || item.length < 3) {
+    return false
+  } else {
+    // does this row terminate in the following thee cells: // amount, ' ', balance
+    const lastThreeRows = takeLast(3, item)
+    return KiwibankStandardRowEndingZ.safeParse(lastThreeRows).success
+  }
+}
