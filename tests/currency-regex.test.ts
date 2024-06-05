@@ -3,7 +3,7 @@ import {
   CURRENCY_REGEX_UNSIGNED,
 } from '../src/lib/currency-regex'
 
-describe.only('Currency regex', () => {
+describe('Currency regex', () => {
   test.each(['$3.00', '$1,234.56', '$10,234,345.02', '$1,803.84'])(
     '%s does match as unsigned currency',
     value => {
