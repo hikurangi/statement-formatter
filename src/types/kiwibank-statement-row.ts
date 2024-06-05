@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { KIWIBANK_DATE_FORMAT_REGEX } from '../lib/kiwibank-date-format-regex'
+import { KIWIBANK_DATE_FORMAT } from '../lib/kiwibank-date-format-regex.js'
 import {
   CURRENCY_REGEX_SIGNED,
   CURRENCY_REGEX_UNSIGNED,
@@ -11,7 +11,7 @@ export const CurrencyStringUnsignedZ = z.string().regex(CURRENCY_REGEX_UNSIGNED)
 export const CurrencyStringSignedZ = z.string().regex(CURRENCY_REGEX_SIGNED)
 
 export const KiwibankStandardRowZ = z.tuple([
-  z.string().regex(KIWIBANK_DATE_FORMAT_REGEX), // Date
+  z.string().regex(KIWIBANK_DATE_FORMAT), // Date
   EmptySpaceStringZ,
   z.string(), // max length? // Memo
   EmptySpaceStringZ,

@@ -1,11 +1,11 @@
 import { z } from 'zod'
-import { OUTPUT_DATE_FORMAT_REGEX } from '../lib/kiwibank-date-format-regex'
+import { OUTPUT_DATE_FORMAT } from '../lib/kiwibank-date-format-regex.js'
 
 // NOTE: zod is probably overkill for now
 // we only need this for parsing in the other direction
 const KiwibankCSVRowZ = z.object({
   'Account number': z.string(),
-  Date: z.string().regex(OUTPUT_DATE_FORMAT_REGEX), // regex
+  Date: z.string().regex(OUTPUT_DATE_FORMAT), // regex
   'Memo/Description': z.string(),
   'Source Code(payment type)': z.string(),
   'TP ref': z.string(),
