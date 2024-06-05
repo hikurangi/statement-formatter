@@ -4,10 +4,7 @@ import {
   CURRENCY_REGEX_SIGNED,
   CURRENCY_REGEX_UNSIGNED,
 } from '../lib/currency-regex.js'
-import {
-  KiwibankStandardRowEndingZ,
-  KiwibankStandardRowT,
-} from './kiwibank-statement-row.js'
+import { KiwibankStandardRowT } from './kiwibank-statement-row.js'
 
 export const isStandardKiwibankRow = (
   item: any
@@ -18,6 +15,9 @@ export const isStandardKiwibankRow = (
     // does this row terminate in the following thee cells: // amount, ' ', balance
     const lastThreeRows = takeLast(3, item)
 
+    // we have an existing validator, KiwibankStandardRowEndingZ, but it is giving false positives.
+    // The regex tests for its first and third strings don't seem to be firing, or the regexes are wrong.
+    // For now, we are doing this directly with each validator, which works so far.
     const amount = lastThreeRows[0]
     const amountResult = CurrencyStringSignedZ.safeParse(amount).success
 
