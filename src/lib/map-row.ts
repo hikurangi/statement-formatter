@@ -10,8 +10,8 @@ import {
   trim,
 } from 'ramda'
 import unformatCurrencyAsNumber from './unformat-currency-as-number'
-import { KiwibankCSVRowT } from '../types/kiwibank-csv-row'
-import { MapRowConfig } from '../types/config'
+import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
+import { MapRowConfig } from '../types/config.js'
 
 const concatBefore = flip(concat)
 
