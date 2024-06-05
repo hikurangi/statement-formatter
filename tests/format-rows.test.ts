@@ -1,9 +1,57 @@
 import { chain } from 'ramda'
 import { cleanMetadataRow, formatRows } from '../src/lib/format-rows'
 import { KiwibankCSVRowT } from '../src/types/kiwibank-csv-row'
+import { isStandardKiwibankRow } from '../src/types/shared'
 
 const ACCOUNT_NUMBER = '98-7654-3211010-01'
 const YEAR = '2022'
+
+describe('Kiwibank standard row type guard', () => {
+  test.each([
+    [
+      [
+        '13 Apr',
+        ' ',
+        'DINGLESCOFFEERETAILCONSWELLIN',
+        'GTON',
+        '$11.50',
+        ' ',
+        '$3,200.86',
+      ],
+    ],
+    [
+      [
+        '26 Mar',
+        ' ',
+        'PARKING LORDS INC., JOHNSONVILLE',
+        ' ',
+        '$4.25',
+        ' ',
+        '$1,803.84',
+      ],
+    ],
+  ])("correctly identifies '%s' as a standard Kiwibank row", row => {
+    expect(isStandardKiwibankRow(row)).toEqual(true)
+  })
+
+  test.each([
+    [['13 Apr', ' ', 'Home Loan', ' ', 'PERIODIC PAY']],
+    [
+      [
+        '13 Apr',
+        ' ',
+        'Transfer to A B C D E F G',
+        'AJDIMMMLIKNULD, F G BLOUNT, M',
+        'PERIODIC PAY',
+      ],
+    ],
+  ])(
+    "correctly identifies '%s' as a not being a standard Kiwibank row",
+    row => {
+      expect(isStandardKiwibankRow(row)).toEqual(false)
+    }
+  )
+})
 
 describe('Row formatter function', () => {
   test('formats a single regular debit row correctly', () => {
