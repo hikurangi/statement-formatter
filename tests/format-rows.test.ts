@@ -30,7 +30,7 @@ describe('Kiwibank standard row type guard', () => {
         '$1,803.84',
       ],
     ],
-  ])("correctly identifies '%s' as a standard Kiwibank row", row => {
+  ])("correctly identifies '%s' as a standard Kiwibank PDF row", row => {
     expect(isStandardKiwibankPDFRow(row)).toEqual(true)
   })
 
@@ -46,7 +46,7 @@ describe('Kiwibank standard row type guard', () => {
       ],
     ],
   ])(
-    "correctly identifies '%s' as a not being a standard Kiwibank row",
+    "correctly identifies '%s' as *not* being a standard Kiwibank PDF row",
     row => {
       expect(isStandardKiwibankPDFRow(row)).toEqual(false)
     }
