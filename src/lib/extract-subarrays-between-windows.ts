@@ -1,7 +1,7 @@
 import { curry } from 'ramda'
 
 type Predicate<T> = (window: Array<T>) => boolean
-interface ExtractSubarraysBetweenWindowsConfig<T> {
+type ExtractSubarraysBetweenWindowsConfig<T> = {
   startWindowSize: number
   endWindowSize: number
   isStartWindow: Predicate<T>

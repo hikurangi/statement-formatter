@@ -1,10 +1,11 @@
 import { append, concat, head, slice, tail, take } from 'ramda'
 
 type Predicate<T> = (window: Array<T>) => boolean
-interface FilterWindowsConfig<T> {
+type FilterWindowsConfig<T> = {
   predicate: Predicate<T>
   windowSize: number
 }
+
 const filterWindows = <T>(
   config: FilterWindowsConfig<T>,
   filteredArray: Array<T>,
