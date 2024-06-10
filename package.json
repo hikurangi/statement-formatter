@@ -21,6 +21,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@fast-csv/format": "^5.0.0",
     "pdfjs-dist": "^4.3.136",
     "ramda": "^0.30.0",
     "zod": "^3.23.8"
