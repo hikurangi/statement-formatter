@@ -1,7 +1,7 @@
 import { chain } from 'ramda'
 import { cleanMetadataRow, formatRows } from '../src/lib/format-rows'
 import { KiwibankCSVRowT } from '../src/types/kiwibank-csv-row'
-import { isStandardKiwibankRow } from '../src/types/shared'
+import { isStandardKiwibankPDFRow } from '../src/types/shared'
 
 const ACCOUNT_NUMBER = '98-7654-3211010-01'
 const YEAR = '2022'
@@ -31,7 +31,7 @@ describe('Kiwibank standard row type guard', () => {
       ],
     ],
   ])("correctly identifies '%s' as a standard Kiwibank row", row => {
-    expect(isStandardKiwibankRow(row)).toEqual(true)
+    expect(isStandardKiwibankPDFRow(row)).toEqual(true)
   })
 
   test.each([
@@ -48,7 +48,7 @@ describe('Kiwibank standard row type guard', () => {
   ])(
     "correctly identifies '%s' as a not being a standard Kiwibank row",
     row => {
-      expect(isStandardKiwibankRow(row)).toEqual(false)
+      expect(isStandardKiwibankPDFRow(row)).toEqual(false)
     }
   )
 })

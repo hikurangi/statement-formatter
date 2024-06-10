@@ -1,5 +1,4 @@
-import { flow, slice } from 'ramda'
-import { AccountStatementT } from '../types/account-statement.js'
+import { slice } from 'ramda'
 import { formatRows } from './format-rows.js'
 import unformatCurrencyAsNumber from './unformat-currency-as-number.js'
 import {
@@ -9,7 +8,8 @@ import {
 import splitWheneverBeforeInclusive from './split-whenever-before-inclusive.js'
 import filterWindows from './filter-windows.js'
 import { isKiwibankPageBoundary } from '../types/kiwibank-page-boundary.js'
-import { KiwibankStandardRowT } from '../types/kiwibank-statement-row.js'
+import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
+import { AccountStatementT } from '../types/account-statement.js'
 
 const formatAccountStatement = (
   rawAccount: Array<string>
@@ -48,7 +48,7 @@ const formatAccountStatement = (
     item => KIWIBANK_DATE_FORMAT.test(item),
     filteredRows
   )
-  const statement: Array<KiwibankStandardRowT> = formatRows(
+  const statement: Array<KiwibankCSVRowT> = formatRows(
     {
       accountNumber,
       startingBalance,

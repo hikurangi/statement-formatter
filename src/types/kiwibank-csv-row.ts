@@ -4,7 +4,7 @@ import { keys } from 'ramda'
 
 // NOTE: zod is probably overkill for now
 // we only need this for parsing in the other direction
-const KiwibankCSVRowZ = z.object({
+export const KiwibankCSVRowZ = z.object({
   'Account number': z.string(),
   Date: z.string().regex(OUTPUT_DATE_FORMAT), // regex
   'Memo/Description': z.string(),

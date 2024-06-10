@@ -6,7 +6,7 @@ import {
   EmptySpaceStringZ,
 } from './shared.js'
 
-export const KiwibankStandardRowZ = z.tuple([
+export const KiwibankPDFRowZ = z.tuple([
   z.string().regex(KIWIBANK_DATE_FORMAT), // Date
   EmptySpaceStringZ,
   z.string(), // max length? // Memo
@@ -15,9 +15,9 @@ export const KiwibankStandardRowZ = z.tuple([
   EmptySpaceStringZ,
   CurrencyStringSignedZ, // balance - is signed cause it can be negative
 ])
-export type KiwibankStandardRowT = z.infer<typeof KiwibankStandardRowZ>
+export type KiwibankPDFRowT = z.infer<typeof KiwibankPDFRowZ>
 
-export const KiwibankStandardRowEndingZ = z.tuple([
+export const KiwibankPDFRowEndingZ = z.tuple([
   CurrencyStringUnsignedZ, // amount - needs to be determined by checking previous balance 🙄
   EmptySpaceStringZ,
   CurrencyStringSignedZ,

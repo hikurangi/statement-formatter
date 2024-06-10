@@ -4,11 +4,11 @@ import {
   CURRENCY_REGEX_SIGNED,
   CURRENCY_REGEX_UNSIGNED,
 } from '../lib/currency-regex.js'
-import { KiwibankStandardRowT } from './kiwibank-statement-row.js'
+import { KiwibankPDFRowT } from './kiwibank-statement-row.js'
 
-export const isStandardKiwibankRow = (
+export const isStandardKiwibankPDFRow = (
   item: any
-): item is KiwibankStandardRowT => {
+): item is KiwibankPDFRowT => {
   if (!Array.isArray(item) || item.length < 3) {
     return false
   } else {
