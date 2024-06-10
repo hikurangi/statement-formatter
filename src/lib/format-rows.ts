@@ -34,18 +34,18 @@ export const cleanMetadataRow = pipe<
 export const formatRows = curry(
   (
     config: FormatRowsConfig,
-    rows: Array<Array<string>>,
+    remainingRows: Array<Array<string>>,
     // For currying functionality, this last parameter can't be optional...
     // ...'cause it frigs with the arity. This makes the API less nice.
     acc: Array<KiwibankCSVRowT>
   ): Array<KiwibankCSVRowT> => {
     const { accountNumber, startingBalance, year } = config
-    if (rows.length === 0) {
+    if (remainingRows.length === 0) {
       return acc
     }
 
     // see base case above. head must exist.
-    const currentRow = head(rows)!
+    const currentRow = head(remainingRows)!
     if (!isStandardKiwibankRow(currentRow)) {
       // NOTE: this branch should be impossible, we eliminate non-standard rows before we get here
       // but we sure wanna know if it's being hit
@@ -55,7 +55,7 @@ export const formatRows = curry(
       )
     }
 
-    const subsequentRows = tail(rows)
+    const subsequentRows = tail(remainingRows)
     const nextRow = head(subsequentRows)
 
     // if we're on the last item OR
@@ -76,7 +76,7 @@ export const formatRows = curry(
       // if row is standard and followed by ABNORMAL rows
       // (NOTE: this doesn't take into account non-standard rows which are the ends of pages, ends of statements etc...)
       const currentRowMetadata = takeWhile(
-        pipe(isStandardKiwibankRow, not),
+        row => !isStandardKiwibankRow(row),
         subsequentRows
       )
 
@@ -88,8 +88,10 @@ export const formatRows = curry(
         )
       ) {
         console.error("\n🙄 tfw metadata rows date doesn't match 🙄\n", {
+          currentRow,
           currentRowMetadata,
         })
+        console.error("\n🙄 tfw metadata rows date doesn't match 🙄\n")
       }
 
       const rowsFromNextStandardRow = slice(
