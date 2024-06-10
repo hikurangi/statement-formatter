@@ -1,34 +1,43 @@
-import { curry } from 'ramda'
+import { append, concat, head, slice, tail, take } from 'ramda'
 
+type Predicate<T> = (window: Array<T>) => boolean
 interface FilterWindowsConfig<T> {
-  predicate: (window: Array<T>) => boolean
+  predicate: Predicate<T>
   windowSize: number
 }
-// This function is like regular filter, but allows us to filter
-// out contiguous windows of rows of size 'windowSize'
-// based on a predicate called on that entire window
-const filterWindows = curry(
-  <T>(
-    { predicate, windowSize }: FilterWindowsConfig<T>,
-    array: Array<T>
-  ): Array<T> => {
-    const result: Array<T> = []
-    for (let i = 0; i <= array.length - windowSize; i++) {
-      const window = array.slice(i, i + windowSize)
-      if (predicate(window)) {
-        result.push(...window)
-      }
+const filterWindows = <T>(
+  config: FilterWindowsConfig<T>,
+  filteredArray: Array<T>,
+  remainingArray: Array<T>
+): Array<T> => {
+  const { predicate, windowSize }: FilterWindowsConfig<T> = config
+  // NOTE: this is fucking dumb but so am I:
+  // if predicate(target) === true, then it is NOT filtered
+
+  if (windowSize >= remainingArray.length) {
+    if (predicate(remainingArray) === false) {
+      return filteredArray
+    } else {
+      return concat(filteredArray, remainingArray)
     }
-    return result
+  } else {
+    const currentWindow = take(windowSize, remainingArray)
+    if (predicate(currentWindow) === false) {
+      return filterWindows(
+        config,
+        filteredArray,
+        slice(windowSize, Infinity, remainingArray)
+      )
+    } else {
+      return filterWindows(
+        config,
+        // NOTE: I hate to see the bang below as much as you do, but windowSize >= remainingArray.length
+        // precludes head being undefined. If it's not there, then you can worry.
+        append(head(remainingArray)!, filteredArray),
+        tail(remainingArray)
+      )
+    }
   }
-)
+}
 
 export default filterWindows
-// // Example usage:
-// const numbers: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-// const filtered: Array<number> = filterWindows(
-//   numbers,
-//   3,
-//   window => window.reduce((acc, curr) => acc + curr, 0) > 10
-// )
-// console.log(filtered) // Output: [4, 5, 6, 7, 8, 9, 10]
