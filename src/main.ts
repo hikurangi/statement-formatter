@@ -1,3 +1,6 @@
+import { resolve } from 'node:path'
+import { writeToPath } from '@fast-csv/format'
+
 import { PDFDocumentProxy, getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 import {
   TextItem,
@@ -12,6 +15,7 @@ import extractSubarraysBetweenWindows from './lib/extract-subarrays-between-wind
 import formatAccountStatement from './lib/format-account-statement.js'
 
 const pdfPath = process.argv[2] || './assets/test.pdf'
+const __dirname = import.meta.dirname
 
 const loadingTask = getDocument(pdfPath)
 
@@ -38,54 +42,74 @@ loadingTask.promise
     return doc
   })
   .then(async doc => {
-    const { numPages } = doc
-    const pageNumbers = range(1, numPages + 1)
-    const promises = map(pageNumber => loadPage(pageNumber, doc), pageNumbers)
+    const pagePromises = flow(doc.numPages + 1, [
+      range(1),
+      map(pageNumber => loadPage(pageNumber, doc)),
+    ])
 
-    const windowSize = 19
+    // TODO: this whole promise could be a pipeline
+    // the pipeline could be a meeting
+    // the meeting could be an email
+    // the email could just walk into the ocean
+    // and never be seen again
+    const accountStatements = flow(
+      // NOTE: not quite right
+      // <
+      //   Array<TextContent>,
+      //   Array<TextItem | TextMarkedContent>,
+      //   Array<string>,
+      //   Array<Array<string>,
+      //   Array<Array<AccountStatementT>
+      // >
+      await Promise.all(pagePromises),
+      [
+        chain(page => page.items),
+        map((row: TextItem | TextMarkedContent) =>
+          // is there a better way to type R.flow?
+          'str' in row ? row.str : ''
+        ),
+        // All we want to do here is
+        // TODO: separate / abstract the pdf-js type concerns from our internal business logic
+        // this means
+        // moving the below function into 'formatAccountStatement'
+        extractSubarraysBetweenWindows({
+          startWindowSize: 19,
+          endWindowSize: 5,
+          isStartWindow: window =>
+            KiwibankAccountHeaderZ.safeParse(window).success,
+          isEndWindow: window =>
+            KiwibankStatementFinalLineZ.safeParse(window).success,
+        }),
+        map(formatAccountStatement),
+      ]
+    )
 
-    const pages = await Promise.all(promises)
-    const items = chain(page => page.items, pages)
-    const itemsSplitBeforeDate = splitWheneverBeforeInclusive(
-      item => 'str' in item && KIWIBANK_DATE_FORMAT.test(item.str),
-      items
-    )
-    const cleanList = itemsSplitBeforeDate.map(row =>
-      row.map(cell => ('str' in cell ? cell.str : ''))
-    )
-    console.log({ cleanList })
-    const itemsWithPossibleMetadataHeaders = cleanList.filter(
-      item => item.length >= windowSize
-    )
-    const contiguousItemsWithPossibleMetadataHeaders = flatten(
-      itemsWithPossibleMetadataHeaders
-    )
-
-    // we wanna start splitting stuff from the start of each accountHeaders subarray
-    // then we can terminate after "closing balance"
-
-    const accountHeaders = findSubarraysBy(
-      contiguousItemsWithPossibleMetadataHeaders,
-      windowSize,
-      candidate => KiwibankAccountHeaderZ.safeParse(candidate).success
-    )
-    // connect each header to its subsequent account rows,
-    // while pulling off the relevant data (year, account number, nickname)
-
-    console.log({ accountHeaders })
-    // return lastPromise
+    return accountStatements
   })
-  .then(() => {
+  .then(async accountStatements => {
+    accountStatements.forEach(
+      ({ accountNumber, statementPeriod, statement }) => {
+        const filePath = resolve(
+          __dirname,
+          '..',
+          '..',
+          'output',
+          `${accountNumber}-${statementPeriod}.csv`
+        )
+        writeToPath(filePath, [kiwibankCSVRowHeaders, ...statement])
+          .on('error', err => {
+            return console.error(err)
+          })
+          .on('finish', () => {
+            console.log(
+              `${accountNumber}-${statementPeriod} written successfully!`
+            )
+          })
+      }
+    )
+
     console.log('# End of Document')
   })
   .catch(err => {
     console.error('Error: ' + err)
   })
-
-// 2. find where the actual statement starts
-
-// 3. strip out the page numbers
-
-// 1. Identify the different accounts in a given statement using the text block
-// 2. split them out
-// 3. clean up / strip page numbers etc
