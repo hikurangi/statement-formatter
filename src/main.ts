@@ -90,11 +90,14 @@ loadingTask.promise
     accountStatements.forEach(
       ({ accountNumber, statementPeriod, statement }) => {
         const filePath = resolve(
+          // TODO: CLI app
+          // pass in input file
+          // pass in output folder
           __dirname,
           '..',
           '..',
           'output',
-          `${accountNumber}-${statementPeriod}.csv`
+          `${accountNumber} - ${statementPeriod}.csv`
         )
         writeToPath(filePath, [kiwibankCSVRowHeaders, ...statement])
           .on('error', err => {
