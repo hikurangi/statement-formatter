@@ -119,6 +119,9 @@ dist
 # macOS
 .DS_Store
 
-# Application output
-output/*.json
-output/*.csv
+# Application IO
+input/*
+output/*
+
+# keep
+!.gitkeep
