@@ -10,4 +10,4 @@ export const OUTPUT_DATE_FORMAT =
 // tolerates weird years but who carez amirite
 
 export const KIWIBANK_ACCOUNT_HEADER_DATE_RANGE_FORMAT =
-  /\b((0[1-9]|[12][0-9]|30) (September|April|June|November)|(0[1-9]|[12][0-9]|3[01]) (January|March|May|July|August|October|December)|(0[1-9]|[12][0-9]) February) [1-2]\d{3} to ((0[1-9]|[12][0-9]|30) (September|April|June|November)|(0[1-9]|[12][0-9]|3[01]) (January|March|May|July|August|October|December)|(0[1-9]|[12][0-9]) February)\b/
+  /\b((0[1-9]|[12][0-9]|30) (September|April|June|November)|(0[1-9]|[12][0-9]|3[01]) (January|March|May|July|August|October|December)|(0[1-9]|[12][0-9]) February) (?<startYear>[1-2]\d{3}) to ((0[1-9]|[12][0-9]|30) (September|April|June|November)|(0[1-9]|[12][0-9]|3[01]) (January|March|May|July|August|October|December)|(0[1-9]|[12][0-9]) February) (?<endYear>[1-2]\d{3})\b/
