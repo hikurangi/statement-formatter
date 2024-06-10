@@ -22,14 +22,15 @@ const mapRow = curry(
     {
       accountNumber,
       year,
-      startingBalance,
+      previousBalance,
       metaDescription = [],
     }: MapRowConfig,
     row: Array<string>
   ): KiwibankCSVRowT => {
     const amount = unformatCurrencyAsNumber(nth(-3, row) || '')
-    const balance = unformatCurrencyAsNumber(nth(-1, row) || '')
-    const isCredit = startingBalance + amount === balance
+    const currentBalance = unformatCurrencyAsNumber(nth(-1, row) || '')
+    const isCredit =
+      (previousBalance + amount).toFixed(2) === currentBalance.toFixed(2)
     const formattedDate = `${row[0]} ${year}`
 
     const description = flow(row, [
@@ -58,7 +59,7 @@ const mapRow = curry(
       'Amount(credit)': isCredit ? amount : 0,
       'Amount(debit)': !isCredit ? amount : 0,
       Amount: isCredit ? amount : -amount,
-      Balance: balance,
+      Balance: currentBalance,
     }
   }
 )

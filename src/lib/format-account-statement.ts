@@ -51,7 +51,7 @@ const formatAccountStatement = (
   const statement: Array<KiwibankCSVRowT> = formatRows(
     {
       accountNumber,
-      startingBalance,
+      previousBalance: startingBalance,
       // see type guard above, checking for undefined 'year' variable
       // if you don't see one, then uh oh! 😱
       year: year!,

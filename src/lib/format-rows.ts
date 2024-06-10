@@ -8,7 +8,7 @@ import {
   flow,
   head,
   includes,
-  not,
+  last,
   pipe,
   slice,
   tail,
@@ -18,6 +18,7 @@ import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
 import { FormatRowsConfig } from '../types/config.js'
 import mapRow from './map-row.js'
 import { isStandardKiwibankPDFRow } from '../types/shared.js'
+import unformatCurrencyAsNumber from './unformat-currency-as-number.js'
 
 // Helpers
 const flippedAppend = flip(append)
@@ -39,13 +40,14 @@ export const formatRows = curry(
     // ...'cause it frigs with the arity. This makes the API less nice.
     acc: Array<KiwibankCSVRowT>
   ): Array<KiwibankCSVRowT> => {
-    const { accountNumber, startingBalance, year } = config
+    const { accountNumber, previousBalance, year } = config
     if (remainingRows.length === 0) {
       return acc
     }
 
     // see base case above. head must exist.
     const currentRow = head(remainingRows)!
+    const currentBalance = unformatCurrencyAsNumber(last(currentRow) || '')
     if (!isStandardKiwibankPDFRow(currentRow)) {
       // NOTE: this branch should be impossible, we eliminate non-standard rows before we get here
       // but we sure wanna know if it's being hit
@@ -67,10 +69,13 @@ export const formatRows = curry(
         mapRow({
           accountNumber,
           year,
-          startingBalance,
+          previousBalance,
         }),
         flippedAppend(acc),
-        formatRows(config, subsequentRows),
+        formatRows(
+          { ...config, previousBalance: currentBalance },
+          subsequentRows
+        ),
       ])
     } else {
       // if row is standard and followed by ABNORMAL rows
@@ -104,11 +109,14 @@ export const formatRows = curry(
         mapRow({
           accountNumber,
           year,
-          startingBalance,
+          previousBalance,
           metaDescription: chain(cleanMetadataRow, currentRowMetadata),
         }),
         flippedAppend(acc),
-        formatRows(config, rowsFromNextStandardRow),
+        formatRows(
+          { ...config, previousBalance: currentBalance },
+          rowsFromNextStandardRow
+        ),
       ])
     }
   }

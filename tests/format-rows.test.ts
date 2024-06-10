@@ -12,8 +12,8 @@ describe('Kiwibank standard row type guard', () => {
       [
         '13 Apr',
         ' ',
-        'DINGLESCOFFEERETAILCONSWELLIN',
-        'GTON',
+        'DINGLESCOFFEERETAILCONSCHEESE',
+        'LAND',
         '$11.50',
         ' ',
         '$3,200.86',
@@ -55,7 +55,7 @@ describe('Kiwibank standard row type guard', () => {
 
 describe('Row formatter function', () => {
   test('formats a single regular debit row correctly', () => {
-    const startingBalance = 1808.9
+    const previousBalance = 1808.9
     const singleRow = [
       [
         '26 Mar',
@@ -89,7 +89,7 @@ describe('Row formatter function', () => {
     ]
     const actual = formatRows(
       {
-        startingBalance,
+        previousBalance,
         accountNumber: ACCOUNT_NUMBER,
         year: YEAR,
       },
@@ -100,7 +100,7 @@ describe('Row formatter function', () => {
   })
 
   test('formats a single regular credit row correctly', () => {
-    const startingBalance = 1803.84
+    const previousBalance = 1803.84
     const singleRow = [
       [
         '26 Mar',
@@ -134,7 +134,7 @@ describe('Row formatter function', () => {
     ]
     const actual = formatRows(
       {
-        startingBalance,
+        previousBalance,
         accountNumber: ACCOUNT_NUMBER,
         year: YEAR,
       },
@@ -145,7 +145,7 @@ describe('Row formatter function', () => {
   })
 
   test('formats a concertina row', () => {
-    const startingBalance = 262685.77
+    const previousBalance = 262685.77
     const concertinaRow = [
       [
         '31 Mar',
@@ -183,7 +183,7 @@ describe('Row formatter function', () => {
 
     const actual = formatRows(
       {
-        startingBalance,
+        previousBalance,
         accountNumber: ACCOUNT_NUMBER,
         year: YEAR,
       },
@@ -194,7 +194,7 @@ describe('Row formatter function', () => {
   })
 
   test('formats a group of rows correctly, including a gnarly multiline one bith both concertina description text AND metadata row text', () => {
-    const startingBalance = 3716.11
+    const previousBalance = 3716.11
     const gnarlyMultiLineSection = [
       ['12 Apr', ' ', 'TRF 4327********2015', ' ', '$2.00', ' ', '$3,714.11'],
       [
@@ -234,8 +234,8 @@ describe('Row formatter function', () => {
       [
         '13 Apr',
         ' ',
-        'DINGLESCOFFEERETAILCONSWELLIN',
-        'GTON',
+        'DINGLESCOFFEERETAILCONSCHEESE',
+        'LAND',
         '$11.50',
         ' ',
         '$3,200.86',
@@ -243,7 +243,7 @@ describe('Row formatter function', () => {
       [
         '13 Apr',
         ' ',
-        'BIGGER RAGLAN WELLINGTON',
+        'BIGGER RAGLAN CHEESELAND',
         ' ',
         '$21.00',
         ' ',
@@ -309,7 +309,7 @@ describe('Row formatter function', () => {
       {
         'Account number': ACCOUNT_NUMBER,
         Date: '13 Apr 2022',
-        'Memo/Description': 'DINGLESCOFFEERETAILCONSWELLIN ;GTON ;',
+        'Memo/Description': 'DINGLESCOFFEERETAILCONSCHEESE ;LAND ;',
         'Source Code(payment type)': '',
         'TP ref': '',
         'TP part': '',
@@ -327,7 +327,7 @@ describe('Row formatter function', () => {
       {
         'Account number': ACCOUNT_NUMBER,
         Date: '13 Apr 2022',
-        'Memo/Description': 'BIGGER RAGLAN WELLINGTON ;',
+        'Memo/Description': 'BIGGER RAGLAN CHEESELAND ;',
         'Source Code(payment type)': '',
         'TP ref': '',
         'TP part': '',
@@ -345,13 +345,295 @@ describe('Row formatter function', () => {
     ]
     const actual = formatRows(
       {
-        startingBalance,
+        previousBalance,
         accountNumber: ACCOUNT_NUMBER,
         year: YEAR,
       },
       gnarlyMultiLineSection,
       []
     )
+    expect(actual).toEqual(expected)
+  })
+
+  test('formats rows with a mix of credits and debits', () => {
+    const mixedRows = [
+      [
+        '15 Mar',
+        ' ',
+        'AP#19435003 TO X F DOODLEBLIP',
+        ' ',
+        '$70.00',
+        ' ',
+        '$915.87',
+      ],
+      ['15 Mar', ' ', 'Pay X F DOODLEBLIP', ' ', 'PERIODIC PAY'],
+      ['15 Mar', ' ', 'Expenses Wilson St Hikurangi', ' ', 'PERIODIC PAY'],
+      ['15 Mar', ' ', 'SANDALS CHEESELAND', ' ', '$17.80', ' ', '$898.07'],
+      [
+        '15 Mar',
+        ' ',
+        'Direct Credit Mono Limited',
+        ' ',
+        '$64.56',
+        ' ',
+        '$962.63',
+      ],
+      ['15 Mar', ' ', 'Ref: Mono Expense'],
+      [
+        '15 Mar',
+        ' ',
+        'Direct Credit Mono Limited',
+        ' ',
+        '$69.07',
+        ' ',
+        '$1,031.70',
+      ],
+      ['15 Mar', ' ', 'Ref: Mono Expense'],
+      [
+        '15 Mar',
+        ' ',
+        'Direct Credit Mono Limited',
+        ' ',
+        '$68.36',
+        ' ',
+        '$1,100.06',
+      ],
+      ['15 Mar', ' ', 'Ref: Mono Expense'],
+      [
+        '15 Mar',
+        ' ',
+        'Direct Credit Mono Limited',
+        ' ',
+        '$336.23',
+        ' ',
+        '$1,436.29',
+      ],
+      ['15 Mar', ' ', 'Ref: Mono Expense'],
+      [
+        '15 Mar',
+        ' ',
+        'Direct Credit Mono Limited',
+        ' ',
+        '$66.03',
+        ' ',
+        '$1,502.32',
+      ],
+      ['15 Mar', ' ', 'Ref: Mono Expense'],
+      [
+        '15 Mar',
+        ' ',
+        'Direct Credit Mono Limited',
+        ' ',
+        '$930.47',
+        ' ',
+        '$2,432.79',
+      ],
+      ['15 Mar', ' ', 'Ref: Mono Expense'],
+      [
+        '15 Mar',
+        ' ',
+        'Bill Payment ROSEN M X',
+        ' ',
+        '$243.00',
+        ' ',
+        '$2,675.79',
+      ],
+      ['15 Mar', ' ', 'YUMS SUSHI CHEESELAND', ' ', '$14.70', ' ', '$2,661.09'],
+    ]
+    const expected: Array<KiwibankCSVRowT> = [
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description':
+          'AP#19435003 TO X F DOODLEBLIP ;Pay X F DOODLEBLIP ;Expenses Wilson St Hikurangi ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 0,
+        'Amount(debit)': 70,
+        Amount: -70,
+        Balance: 915.87,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'SANDALS CHEESELAND ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 0,
+        'Amount(debit)': 17.8,
+        Amount: -17.8,
+        Balance: 898.07,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'Direct Credit Mono Limited ;Ref: Mono Expense ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 64.56,
+        'Amount(debit)': 0,
+        Amount: 64.56,
+        Balance: 962.63,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'Direct Credit Mono Limited ;Ref: Mono Expense ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 69.07,
+        'Amount(debit)': 0,
+        Amount: 69.07,
+        Balance: 1031.7,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'Direct Credit Mono Limited ;Ref: Mono Expense ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 68.36,
+        'Amount(debit)': 0,
+        Amount: 68.36,
+        Balance: 1100.06,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'Direct Credit Mono Limited ;Ref: Mono Expense ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 336.23,
+        'Amount(debit)': 0,
+        Amount: 336.23,
+        Balance: 1436.29,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'Direct Credit Mono Limited ;Ref: Mono Expense ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 66.03,
+        'Amount(debit)': 0,
+        Amount: 66.03,
+        Balance: 1502.32,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'Direct Credit Mono Limited ;Ref: Mono Expense ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 930.47,
+        'Amount(debit)': 0,
+        Amount: 930.47,
+        Balance: 2432.79,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'Bill Payment ROSEN M X ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 243,
+        'Amount(debit)': 0,
+        Amount: 243,
+        Balance: 2675.79,
+      },
+      {
+        'Account number': ACCOUNT_NUMBER,
+        Date: '15 Mar 2022',
+        'Memo/Description': 'YUMS SUSHI CHEESELAND ;',
+        'Source Code(payment type)': '',
+        'TP ref': '',
+        'TP part': '',
+        'TP code': '',
+        'OP ref': '',
+        'OP part': '',
+        'OP code': '',
+        'OP name': '',
+        'OP Bank Account Number': '',
+        'Amount(credit)': 0,
+        'Amount(debit)': 14.7,
+        Amount: -14.7,
+        Balance: 2661.09,
+      },
+    ]
+
+    const actual = formatRows(
+      {
+        accountNumber: ACCOUNT_NUMBER,
+        previousBalance: 985.87,
+        year: '2022',
+      },
+      mixedRows,
+      []
+    )
+
     expect(actual).toEqual(expected)
   })
 })
