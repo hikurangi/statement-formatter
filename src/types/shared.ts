@@ -27,9 +27,9 @@ export const isStandardKiwibankRow = (
     const balance = lastThreeRows[2]
     const balanceResult = CurrencyStringSignedZ.safeParse(balance).success
 
-    return (
+    const result =
       amountResult === true && spaceResult === true && balanceResult === true
-    )
+    return result
   }
 }
 
