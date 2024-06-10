@@ -15,9 +15,8 @@ import {
   takeWhile,
 } from 'ramda'
 import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
-
 import { FormatRowsConfig } from '../types/config.js'
-import mapRow from './map-row'
+import mapRow from './map-row.js'
 import { isStandardKiwibankRow } from '../types/shared.js'
 
 // Helpers

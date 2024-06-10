@@ -1,10 +1,15 @@
 import { PDFDocumentProxy, getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
-import { chain, flatten, map, range } from 'ramda'
-import splitWheneverBeforeInclusive from './lib/split-whenever-before-inclusive.js'
-import { KIWIBANK_DATE_FORMAT } from './lib/kiwibank-date-format-regex.js'
+import {
+  TextItem,
+  TextMarkedContent,
+} from 'pdfjs-dist/types/src/display/api.js'
+import { chain, flow, map, range } from 'ramda'
 
-import findSubarraysBy from './lib/find-subarrays-by.js'
+import { kiwibankCSVRowHeaders } from './types/kiwibank-csv-row.js'
 import { KiwibankAccountHeaderZ } from './types/kiwibank-account-headers.js'
+import { KiwibankStatementFinalLineZ } from './types/kiwibank-statement-final-line.js'
+import extractSubarraysBetweenWindows from './lib/extract-subarrays-between-windows.js'
+import formatAccountStatement from './lib/format-account-statement.js'
 
 const pdfPath = process.argv[2] || './assets/test.pdf'
 

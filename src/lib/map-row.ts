@@ -9,7 +9,7 @@ import {
   slice,
   trim,
 } from 'ramda'
-import unformatCurrencyAsNumber from './unformat-currency-as-number'
+import unformatCurrencyAsNumber from './unformat-currency-as-number.js'
 import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
 import { MapRowConfig } from '../types/config.js'
 

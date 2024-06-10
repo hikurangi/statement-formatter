@@ -1,8 +1,7 @@
 import { z } from 'zod'
 import { EmptyStringOrSpaceZ } from './shared.js'
 import { KIWIBANK_ACCOUNT_HEADER_DATE_RANGE_FORMAT } from '../lib/kiwibank-date-format-regex.js'
-
-const ACCOUNT_NUMBER_REGEX = /\d\d-\d{4}-\d{7}-\d\d/
+import ACCOUNT_NUMBER_REGEX from '../lib/account-number-regex.js'
 
 export const KiwibankAccountHeaderZ = z.tuple([
   z.literal('Account Name:'),
