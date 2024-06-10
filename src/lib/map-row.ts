@@ -2,6 +2,7 @@ import {
   concat,
   curry,
   endsWith,
+  filter,
   flip,
   flow,
   join,
@@ -12,6 +13,7 @@ import {
 import unformatCurrencyAsNumber from './unformat-currency-as-number.js'
 import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
 import { MapRowConfig } from '../types/config.js'
+import { EmptyStringOrSpaceZ } from '../types/shared.js'
 
 const concatBefore = flip(concat)
 
@@ -33,10 +35,11 @@ const mapRow = curry(
     const description = flow(row, [
       slice(2, -3),
       concatBefore(metaDescription),
+      filter(item => EmptyStringOrSpaceZ.safeParse(item).success === false),
       join(' ;'),
       trim,
       // the function below just lets us consistently match Kiwibank's (bad) formatting.
-      str => (endsWith(' ;', str) ? str : concat(str, ' ;')),
+      str => concat(str, ' ;'),
     ])
 
     return {
