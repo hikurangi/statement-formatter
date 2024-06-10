@@ -19,3 +19,6 @@ export const KiwibankPageBoundaryZ = z.tuple([
   z.literal('Balance'),
   EmptyStringOrSpaceZ,
 ])
+
+export const isKiwibankPageBoundary = (window: Array<string>) =>
+  KiwibankPageBoundaryZ.safeParse(window).success

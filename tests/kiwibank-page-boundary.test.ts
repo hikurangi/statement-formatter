@@ -4,7 +4,7 @@ describe('Kiwibank page boundary', () => {
   test.each([
     [
       [
-        'ST 7083 020804',
+        'ST 8190 050718',
         'Page 3 of 8 (Please turn over)',
         '',
         'Date',
@@ -21,7 +21,7 @@ describe('Kiwibank page boundary', () => {
     ],
     [
       [
-        'ST 7083 020804',
+        'ST 8190 050718',
         'Page 4 of 8',
         '',
         'Date',
@@ -38,7 +38,7 @@ describe('Kiwibank page boundary', () => {
     ],
     [
       [
-        'ST 7083 020804',
+        'ST 8190 050718',
         'Page 5 of 8 (Please turn over)',
         '',
         'Date',
@@ -55,7 +55,7 @@ describe('Kiwibank page boundary', () => {
     ],
     [
       [
-        'ST 7083 020804',
+        'ST 8190 050718',
         'Page 6 of 8',
         '',
         'Date',
@@ -72,7 +72,7 @@ describe('Kiwibank page boundary', () => {
     ],
     [
       [
-        'ST 7083 020804',
+        'ST 8190 050718',
         'Page 7 of 8 (Please turn over)',
         '',
         'Date',
