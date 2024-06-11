@@ -118,3 +118,10 @@ dist
 
 # macOS
 .DS_Store
+
+# Application IO
+input/*
+output/*
+
+# keep
+!.gitkeep

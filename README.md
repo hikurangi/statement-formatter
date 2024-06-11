@@ -1,2 +1,3 @@
 # statement-formatter
-A small Node/TS tool for formatting bank statements.
+
+A small Node JS tool for converting Kiwibank PDF statements to Kiwibank-ish CSVs.
