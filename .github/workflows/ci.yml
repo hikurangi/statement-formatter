@@ -1,5 +1,5 @@
 name: CI
-run-name: ${{ github.actor }}'s test run
+run-name: test run initiated by ${{ github.actor }}
 
 on:
   pull_request:
