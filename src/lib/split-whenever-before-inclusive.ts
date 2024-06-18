@@ -1,29 +1,27 @@
+import { isEmpty, head, tail, splitWhen } from 'ramda'
+
+// Splits an array into subarrays at each element that
+// satisfies the predicate, including the matching element
+// at the start of the new subarray
 const splitWheneverBeforeInclusive = <T>(
   predicate: (item: T) => boolean,
   arr: Array<T>
 ): Array<Array<T>> => {
-  const result: Array<Array<T>> = []
-  let currentSubarray: Array<T> = []
+  if (isEmpty(arr)) return []
 
-  for (const item of arr) {
-    if (predicate(item)) {
-      if (currentSubarray.length > 0) {
-        result.push(currentSubarray)
-      }
-      // initialise the next sub-array with
-      // the item which has just satisfied
-      // the predicate
-      currentSubarray = [item]
-    } else {
-      currentSubarray.push(item)
-    }
+  const first = head(arr) as T
+  const rest = tail(arr) as Array<T>
+
+  if (predicate(first)) {
+    const [group, remaining] = splitWhen(predicate, rest)
+    return [
+      [first, ...group],
+      ...splitWheneverBeforeInclusive(predicate, remaining),
+    ]
   }
 
-  if (currentSubarray.length > 0) {
-    result.push(currentSubarray)
-  }
-
-  return result
+  const [group, remaining] = splitWhen(predicate, arr)
+  return [group, ...splitWheneverBeforeInclusive(predicate, remaining)]
 }
 
 export default splitWheneverBeforeInclusive
