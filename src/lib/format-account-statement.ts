@@ -38,9 +38,8 @@ const formatAccountStatement = (
   const filteredRows = filterWindows(
     {
       windowSize: 13,
-      predicate: (window: Array<string>) => !isKiwibankPageBoundary(window),
+      predicate: window => !isKiwibankPageBoundary(window),
     },
-    [],
     accountRows
   )
 
