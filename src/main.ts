@@ -12,7 +12,7 @@ import { add, chain, flow, map, pipe, prop, range } from 'ramda'
 import { kiwibankCSVRowHeaders } from './types/kiwibank-csv-row.js'
 import { KiwibankAccountHeaderZ } from './types/kiwibank-account-headers.js'
 import { KiwibankStatementFinalLineZ } from './types/kiwibank-statement-final-line.js'
-import extractSubarraysBetweenWindows from './lib/extract-subarrays-between-windows.js'
+import extractSubarraysBetweenWindowsInclusive from './lib/extract-subarrays-between-windows-inclusive.js'
 import formatAccountStatement from './lib/format-account-statement.js'
 import { AccountStatementT } from './types/account-statement.js'
 
@@ -41,7 +41,7 @@ const resolveAllPromises = async <T>(promises: Array<Promise<T>>) =>
 const mapTextContentToAccountStatements = pipe(
   chain((page: TextContent) => page.items),
   map((row: TextItem | TextMarkedContent) => ('str' in row ? row.str : '')),
-  extractSubarraysBetweenWindows({
+  extractSubarraysBetweenWindowsInclusive({
     startWindowSize: 19,
     endWindowSize: 5,
     isStartWindow: window => KiwibankAccountHeaderZ.safeParse(window).success,
