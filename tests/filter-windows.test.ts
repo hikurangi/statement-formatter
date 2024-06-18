@@ -111,7 +111,6 @@ describe('Window-filtering function', () => {
           windowSize: 13,
           predicate: (window: Array<string>) => !isKiwibankPageBoundary(window),
         },
-        [],
         unchangedInputAndOutput
       )
     ).toEqual(unchangedInputAndOutput)
@@ -186,7 +185,6 @@ describe('Window-filtering function', () => {
           windowSize: 13,
           predicate: (window: Array<string>) => !isKiwibankPageBoundary(window),
         },
-        [],
         inputRows
       )
     ).toEqual(expected)
