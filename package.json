@@ -22,8 +22,11 @@
   },
   "dependencies": {
     "@fast-csv/format": "^5.0.0",
+    "next": "^14.2.4",
     "pdfjs-dist": "^4.3.136",
     "ramda": "^0.30.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "zod": "^3.23.8"
   }
 }
