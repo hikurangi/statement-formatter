@@ -123,5 +123,8 @@ dist
 input/*
 output/*
 
+# Workspace
+.vscode
+
 # keep
 !.gitkeep
