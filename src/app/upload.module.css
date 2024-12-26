@@ -1,0 +1,38 @@
+.container {
+  text-align: center;
+  border: 2px dashed #cccccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 550px;
+  margin: 0 auto;
+}
+
+.dropzone {
+  border: 2px dashed #007bff;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.dropzone p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.files {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.files ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.files li {
+  margin-bottom: 10px;
+}
+
+.files li button {
+  margin-left: 10px;
+}
