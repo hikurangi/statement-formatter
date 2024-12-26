@@ -1,5 +1,7 @@
-import filterWindows from '../src/lib/filter-windows.js'
-import { isKiwibankPageBoundary } from '../src/types/kiwibank-page-boundary'
+import { describe, test } from 'jsr:@std/testing/bdd'
+import { expect } from 'jsr:@std/expect'
+import filterWindows from '../src/lib/filter-windows.ts'
+import { isKiwibankPageBoundary } from '../src/types/kiwibank-page-boundary.ts'
 
 const unchangedInputAndOutput = [
   '$1,512.64',

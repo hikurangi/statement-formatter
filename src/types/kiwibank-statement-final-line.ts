@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import { EmptyStringOrSpaceZ } from './shared.js'
-import { KIWIBANK_DATE_FORMAT } from '../lib/kiwibank-date-format-regex.js'
-import { CURRENCY_REGEX_SIGNED } from '../lib/currency-regex.js'
+import { z } from 'npm:zod'
+import { EmptyStringOrSpaceZ } from './shared.ts'
+import { KIWIBANK_DATE_FORMAT } from '../lib/kiwibank-date-format-regex.ts'
+import { CURRENCY_REGEX_SIGNED } from '../lib/currency-regex.ts'
 
 export const KiwibankStatementFinalLineZ = z.tuple([
   z.string().regex(KIWIBANK_DATE_FORMAT),

@@ -1,38 +1,56 @@
+import { describe, test } from 'jsr:@std/testing/bdd'
+import { expect } from 'jsr:@std/expect'
+
 import {
   CURRENCY_REGEX_SIGNED,
   CURRENCY_REGEX_UNSIGNED,
-} from '../src/lib/currency-regex'
+} from '../src/lib/currency-regex.ts'
 
 describe('Currency regex', () => {
-  test.each(['$3.00', '$1,234.56', '$10,234,345.02', '$1,803.84'])(
-    '%s does match as unsigned currency',
-    value => {
-      expect(CURRENCY_REGEX_UNSIGNED.test(value)).toEqual(true)
-    }
-  )
+  for (const testCase of [
+    '$3.00',
+    '$1,234.56',
+    '$10,234,345.02',
+    '$1,803.84',
+  ]) {
+    test(`${testCase} does match as unsigned currency`, () => {
+      expect(CURRENCY_REGEX_UNSIGNED.test(testCase)).toEqual(true)
+    })
+  }
 
-  test.each(['1,234.56', '$10,23,345.02', '$1', '99.0', '$12.0', '-$9,342.85'])(
-    '%s does not match as unsigned currency',
-    value => {
-      expect(CURRENCY_REGEX_UNSIGNED.test(value)).toEqual(false)
-    }
-  )
+  for (const testCase of [
+    '1,234.56',
+    '$10,23,345.02',
+    '$1',
+    '99.0',
+    '$12.0',
+    '-$9,342.85',
+  ]) {
+    test(`${testCase} does not match as unsigned currency`, () => {
+      expect(CURRENCY_REGEX_UNSIGNED.test(testCase)).toEqual(false)
+    })
+  }
 
-  test.each(['$3.00', '$1,234.56', '$10,234,345.02', '-$3,667,605.43'])(
-    '%s does match as signed currency',
-    value => {
-      expect(CURRENCY_REGEX_SIGNED.test(value)).toEqual(true)
-    }
-  )
+  for (const testCase of [
+    '$3.00',
+    '$1,234.56',
+    '$10,234,345.02',
+    '-$3,667,605.43',
+  ])
+    test(`${testCase} does match as signed currency`, () => {
+      expect(CURRENCY_REGEX_SIGNED.test(testCase)).toEqual(true)
+    })
 
-  test.each([
+  for (const testCase of [
     '-$1,2,34.56',
     '$10,23,345.02',
     '$1',
     '99.0',
     '$12.0',
     '-9,342.85',
-  ])('%s does not match as signed currency', value => {
-    expect(CURRENCY_REGEX_SIGNED.test(value)).toEqual(false)
-  })
+  ]) {
+    test(`${testCase} does not match as signed currency`, () => {
+      expect(CURRENCY_REGEX_SIGNED.test(testCase)).toEqual(false)
+    })
+  }
 })

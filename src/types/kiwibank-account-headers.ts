@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import { EmptyStringOrSpaceZ } from './shared.js'
-import { KIWIBANK_ACCOUNT_HEADER_DATE_RANGE_FORMAT } from '../lib/kiwibank-date-format-regex.js'
-import ACCOUNT_NUMBER_REGEX from '../lib/account-number-regex.js'
+import { z } from 'npm:zod'
+import { EmptyStringOrSpaceZ } from './shared.ts'
+import { KIWIBANK_ACCOUNT_HEADER_DATE_RANGE_FORMAT } from '../lib/kiwibank-date-format-regex.ts'
+import ACCOUNT_NUMBER_REGEX from '../lib/account-number-regex.ts'
 
 export const KiwibankAccountHeaderZ = z.tuple([
   z.literal('Account Name:'),

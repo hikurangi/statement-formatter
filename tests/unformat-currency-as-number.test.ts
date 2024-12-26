@@ -1,4 +1,6 @@
-import unformatCurrencyAsNumber from '../src/lib/unformat-currency-as-number'
+import { describe, test } from 'jsr:@std/testing/bdd'
+import { expect } from 'jsr:@std/expect'
+import unformatCurrencyAsNumber from '../src/lib/unformat-currency-as-number.ts'
 
 describe('The unformat function', () => {
   test('unformats a long figure', () => {

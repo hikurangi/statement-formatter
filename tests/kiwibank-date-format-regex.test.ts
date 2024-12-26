@@ -1,4 +1,6 @@
-import { KIWIBANK_DATE_FORMAT } from '../src/lib/kiwibank-date-format-regex'
+import { describe, test } from 'jsr:@std/testing/bdd'
+import { expect } from 'jsr:@std/expect'
+import { KIWIBANK_DATE_FORMAT } from '../src/lib/kiwibank-date-format-regex.ts'
 
 const generateRangeOfFormattedDates = (
   startDate: Date,
@@ -10,7 +12,7 @@ const generateRangeOfFormattedDates = (
     month: 'short',
   })
 
-  let currentDate = new Date(startDate)
+  const currentDate = new Date(startDate)
 
   while (currentDate <= endDate) {
     const formattedDate = formatter.format(currentDate)
@@ -29,9 +31,11 @@ describe('Date format regex', () => {
     new Date('2024-12-31')
   )
 
-  test.each(allValidDays)("'%s' should be valid", date => {
-    expect(KIWIBANK_DATE_FORMAT.test(date)).toEqual(true)
-  })
+  for (const validDay of allValidDays) {
+    test(`'${validDay}' should be valid`, () => {
+      expect(KIWIBANK_DATE_FORMAT.test(validDay)).toEqual(true)
+    })
+  }
 
   const someInvalidDays = [
     '30 Feb',
@@ -45,7 +49,9 @@ describe('Date format regex', () => {
     '13 Februar',
   ]
 
-  test.each(someInvalidDays)("'%s' should not be valid", date => {
-    expect(KIWIBANK_DATE_FORMAT.test(date)).toEqual(false)
-  })
+  for (const invalidDay of someInvalidDays) {
+    test(`'${invalidDay}' should not be valid`, () => {
+      expect(KIWIBANK_DATE_FORMAT.test(invalidDay)).toEqual(false)
+    })
+  }
 })

@@ -1,40 +1,42 @@
-import { chain } from 'ramda'
-import { cleanMetadataRow, formatRows } from '../src/lib/format-rows'
-import { KiwibankCSVRowT } from '../src/types/kiwibank-csv-row'
-import { isStandardKiwibankPDFRow } from '../src/types/shared'
+import { describe, test } from 'jsr:@std/testing/bdd'
+import { expect } from 'jsr:@std/expect'
+import { chain } from 'npm:ramda'
+import { cleanMetadataRow, formatRows } from '../src/lib/format-rows.ts'
+import { KiwibankCSVRowT } from '../src/types/kiwibank-csv-row.ts'
+import { isStandardKiwibankPDFRow } from '../src/types/shared.ts'
 
 const ACCOUNT_NUMBER = '98-7654-3211010-01'
 const YEAR = '2022'
 
 describe('Kiwibank standard row type guard', () => {
-  test.each([
+  for (const testCase of [
     [
-      [
-        '13 Apr',
-        ' ',
-        'DINGLESCOFFEERETAILCONSCHEESE',
-        'LAND',
-        '$11.50',
-        ' ',
-        '$3,200.86',
-      ],
+      '13 Apr',
+      ' ',
+      'DINGLESCOFFEERETAILCONSCHEESE',
+      'LAND',
+      '$11.50',
+      ' ',
+      '$3,200.86',
     ],
     [
-      [
-        '26 Mar',
-        ' ',
-        'PARKING LORDS INC., JOHNSONVILLE',
-        ' ',
-        '$4.25',
-        ' ',
-        '$1,803.84',
-      ],
+      '26 Mar',
+      ' ',
+      'PARKING LORDS INC., JOHNSONVILLE',
+      ' ',
+      '$4.25',
+      ' ',
+      '$1,803.84',
     ],
-  ])("correctly identifies '%s' as a standard Kiwibank PDF row", row => {
-    expect(isStandardKiwibankPDFRow(row)).toEqual(true)
-  })
+  ]) {
+    test(`correctly identifies '${JSON.stringify(
+      testCase
+    )}' as a standard Kiwibank PDF row`, () => {
+      expect(isStandardKiwibankPDFRow(testCase)).toEqual(true)
+    })
+  }
 
-  test.each([
+  for (const testCase of [
     [['13 Apr', ' ', 'Home Loan', ' ', 'PERIODIC PAY']],
     [
       [
@@ -45,12 +47,13 @@ describe('Kiwibank standard row type guard', () => {
         'PERIODIC PAY',
       ],
     ],
-  ])(
-    "correctly identifies '%s' as *not* being a standard Kiwibank PDF row",
-    row => {
-      expect(isStandardKiwibankPDFRow(row)).toEqual(false)
-    }
-  )
+  ]) {
+    test(`correctly identifies '${JSON.stringify(
+      testCase
+    )}' as *not* being a standard Kiwibank PDF row`, () => {
+      expect(isStandardKiwibankPDFRow(testCase)).toEqual(false)
+    })
+  }
 })
 
 describe('Row formatter function', () => {

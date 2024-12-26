@@ -1,10 +1,10 @@
-import { z } from 'zod'
-import { KIWIBANK_DATE_FORMAT } from '../lib/kiwibank-date-format-regex.js'
+import { z } from 'npm:zod'
+import { KIWIBANK_DATE_FORMAT } from '../lib/kiwibank-date-format-regex.ts'
 import {
   CurrencyStringSignedZ,
   CurrencyStringUnsignedZ,
   EmptySpaceStringZ,
-} from './shared.js'
+} from './shared.ts'
 
 export const KiwibankPDFRowZ = z.tuple([
   z.string().regex(KIWIBANK_DATE_FORMAT), // Date

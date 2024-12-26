@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import { EmptyStringOrSpaceZ } from './shared.js'
+import { z } from 'npm:zod'
+import { EmptyStringOrSpaceZ } from './shared.ts'
 const KIWIBANK_STATEMENT_NUMBER_REGEX = /\bST \d{4} \d{6}\b/
 const KIWIBANK_PAGE_NUMBER_REGEX =
   /\bPage \d{1,2} of \d{1,2}( \(Please turn over\))?\b/

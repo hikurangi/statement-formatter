@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import ACCOUNT_NUMBER_REGEX from '../lib/account-number-regex'
-import { KIWIBANK_ACCOUNT_HEADER_DATE_RANGE_FORMAT } from '../lib/kiwibank-date-format-regex'
-import { KiwibankCSVRowZ } from './kiwibank-csv-row'
+import { z } from 'npm:zod'
+import ACCOUNT_NUMBER_REGEX from '../lib/account-number-regex.ts'
+import { KIWIBANK_ACCOUNT_HEADER_DATE_RANGE_FORMAT } from '../lib/kiwibank-date-format-regex.ts'
+import { KiwibankCSVRowZ } from './kiwibank-csv-row.ts'
 
 export const AccountStatementZ = z.object({
   accountNumber: z.string().regex(ACCOUNT_NUMBER_REGEX),

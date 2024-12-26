@@ -9,11 +9,11 @@ import {
   nth,
   slice,
   trim,
-} from 'ramda'
-import unformatCurrencyAsNumber from './unformat-currency-as-number.js'
-import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
-import { MapRowConfig } from '../types/config.js'
-import { EmptyStringOrSpaceZ } from '../types/shared.js'
+} from 'npm:ramda'
+import unformatCurrencyAsNumber from './unformat-currency-as-number.ts'
+import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.ts'
+import { MapRowConfig } from '../types/config.ts'
+import { EmptyStringOrSpaceZ } from '../types/shared.ts'
 
 const concatBefore = flip(concat)
 
@@ -36,11 +36,13 @@ const mapRow = curry(
     const description = flow(row, [
       slice(2, -3),
       concatBefore(metaDescription),
-      filter(item => EmptyStringOrSpaceZ.safeParse(item).success === false),
+      filter(
+        (item: unknown) => EmptyStringOrSpaceZ.safeParse(item).success === false
+      ),
       join(' ;'),
       trim,
       // the function below just lets us consistently match Kiwibank's (bad) formatting.
-      str => concat(str, ' ;'),
+      (str: string) => concat(str, ' ;'),
     ])
 
     return {

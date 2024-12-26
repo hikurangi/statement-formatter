@@ -1,20 +1,26 @@
 import { resolve } from 'node:path'
-import { writeToPath } from '@fast-csv/format'
 
-import { PDFDocumentProxy, getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
+import { writeToPath } from 'npm:@fast-csv/format'
+
+import {
+  PDFDocumentProxy,
+  getDocument,
+} from 'npm:pdfjs-dist/legacy/build/pdf.mjs'
 import {
   TextContent,
   TextItem,
   TextMarkedContent,
-} from 'pdfjs-dist/types/src/display/api.js'
-import { add, chain, flow, map, pipe, prop, range } from 'ramda'
+} from 'npm:pdfjs-dist/types/src/display/api.mjs'
+import { add, chain, flow, map, pipe, prop, range } from 'npm:ramda'
 
-import { kiwibankCSVRowHeaders } from './types/kiwibank-csv-row.js'
-import { KiwibankAccountHeaderZ } from './types/kiwibank-account-headers.js'
-import { KiwibankStatementFinalLineZ } from './types/kiwibank-statement-final-line.js'
-import extractSubarraysBetweenWindowsInclusive from './lib/extract-subarrays-between-windows-inclusive.js'
-import formatAccountStatement from './lib/format-account-statement.js'
-import { AccountStatementT } from './types/account-statement.js'
+import { kiwibankCSVRowHeaders } from './types/kiwibank-csv-row.ts'
+
+import { KiwibankAccountHeaderZ } from './types/kiwibank-account-headers.ts'
+import { KiwibankStatementFinalLineZ } from './types/kiwibank-statement-final-line.ts'
+import extractSubarraysBetweenWindowsInclusive from './lib/extract-subarrays-between-windows-inclusive.ts'
+import formatAccountStatement from './lib/format-account-statement.ts'
+import { AccountStatementT } from './types/account-statement.ts'
+import process from 'node:process'
 
 const pdfPath = process.argv[2] || './input/test.pdf'
 
@@ -27,6 +33,7 @@ const loadPage = async (pageNum: number, doc: PDFDocumentProxy) => {
 }
 
 // TODO: can this work point-free with pipe?
+// TODO: switch to ts-belt for a (presumably) point-free solution
 const getDocumentPagePromises = (doc: PDFDocumentProxy) =>
   flow(doc, [
     prop('numPages'),
@@ -58,7 +65,6 @@ const writeAccountsToDisk = (accountStatements: Array<AccountStatementT>) =>
       // pass in input file
       // pass in output folder
       __dirname,
-      '..',
       '..',
       'output',
       `${accountNumber} - ${statementPeriod}.csv`

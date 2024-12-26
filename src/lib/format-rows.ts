@@ -13,12 +13,12 @@ import {
   slice,
   tail,
   takeWhile,
-} from 'ramda'
-import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
-import { FormatRowsConfig } from '../types/config.js'
-import mapRow from './map-row.js'
-import { isStandardKiwibankPDFRow } from '../types/shared.js'
-import unformatCurrencyAsNumber from './unformat-currency-as-number.js'
+} from 'npm:ramda'
+import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.ts'
+import { FormatRowsConfig } from '../types/config.ts'
+import mapRow from './map-row.ts'
+import { isStandardKiwibankPDFRow } from '../types/shared.ts'
+import unformatCurrencyAsNumber from './unformat-currency-as-number.ts'
 
 // Helpers
 const flippedAppend = flip(append)
@@ -29,7 +29,7 @@ export const cleanMetadataRow = pipe<
   Array<string> // result of fn 2
 >(
   slice(2, Infinity),
-  filter(cell => includes(cell, [' ', 'PERIODIC PAY']) === false)
+  filter((cell: string) => includes(cell, [' ', 'PERIODIC PAY']) === false)
 )
 
 export const formatRows = curry(
@@ -81,14 +81,14 @@ export const formatRows = curry(
       // if row is standard and followed by ABNORMAL rows
       // (NOTE: this doesn't take into account non-standard rows which are the ends of pages, ends of statements etc...)
       const currentRowMetadata = takeWhile(
-        row => !isStandardKiwibankPDFRow(row),
+        (row: Array<string>) => !isStandardKiwibankPDFRow(row),
         subsequentRows
       )
 
       if (
         // Can also get confirmation by checking that the 'metadata rows' also have the same date as the real row. The date is always in position '0'
         !all(
-          metadataRow => metadataRow[0] === currentRow[0],
+          (metadataRow: Array<string>) => metadataRow[0] === currentRow[0],
           currentRowMetadata
         )
       ) {

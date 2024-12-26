@@ -1,4 +1,4 @@
-import { curry, flow, slice } from 'ramda'
+import { curry, flow, slice } from 'npm:ramda'
 
 export type WindowComparisonPredicate<T> = (window: Array<T>) => boolean
 type ExtractSubarraysBetweenWindowsConfig<T> = {
@@ -49,11 +49,12 @@ const extractSubarraysBetweenWindowsInclusive = curry(
         ),
       ])
 
+    // TODO: ts-belt rewrite
     const findEndIndex = curry((startIdx: number, arr: Array<T>): number =>
       flow(arr, [
         slice(startIdx, Infinity),
-        a =>
-          a.findIndex((_, idx) =>
+        (a: Array<T>) =>
+          a.findIndex((_: unknown, idx: number) =>
             isEndWindow(
               slice(startIdx + idx, startIdx + idx + endWindowSize, arr)
             )

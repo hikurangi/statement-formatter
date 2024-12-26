@@ -1,15 +1,15 @@
-import { slice } from 'ramda'
-import { formatRows } from './format-rows.js'
-import unformatCurrencyAsNumber from './unformat-currency-as-number.js'
+import { slice } from 'npm:ramda'
+import { formatRows } from './format-rows.ts'
+import unformatCurrencyAsNumber from './unformat-currency-as-number.ts'
 import {
   KIWIBANK_ACCOUNT_HEADER_DATE_RANGE_FORMAT,
   KIWIBANK_DATE_FORMAT,
-} from './kiwibank-date-format-regex.js'
-import splitWheneverBeforeInclusive from './split-whenever-before-inclusive.js'
-import filterWindows from './filter-windows.js'
-import { isKiwibankPageBoundary } from '../types/kiwibank-page-boundary.js'
-import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.js'
-import { AccountStatementT } from '../types/account-statement.js'
+} from './kiwibank-date-format-regex.ts'
+import splitWheneverBeforeInclusive from './split-whenever-before-inclusive.ts'
+import filterWindows from './filter-windows.ts'
+import { isKiwibankPageBoundary } from '../types/kiwibank-page-boundary.ts'
+import { KiwibankCSVRowT } from '../types/kiwibank-csv-row.ts'
+import { AccountStatementT } from '../types/account-statement.ts'
 
 const formatAccountStatement = (
   rawAccount: Array<string>

@@ -1,4 +1,6 @@
-import splitWheneverBeforeInclusive from '../src/lib/split-whenever-before-inclusive'
+import splitWheneverBeforeInclusive from '../src/lib/split-whenever-before-inclusive.ts'
+import { test } from 'jsr:@std/testing/bdd'
+import { expect } from 'jsr:@std/expect'
 
 test('Splits as expected', () => {
   const list = [1, 5, 2, 2, 1, 1, 3, 1, 2, 1, 2]

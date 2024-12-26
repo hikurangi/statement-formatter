@@ -1,4 +1,4 @@
-import { isEmpty, head, tail, splitWhen } from 'ramda'
+import { isEmpty, head, tail, splitWhen } from 'npm:ramda'
 
 // Splits an array into subarrays at each element that
 // satisfies the predicate, including the matching element

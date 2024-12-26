@@ -28,7 +28,7 @@ const UploadForm = () => {
     e.preventDefault()
     if (!files) return
 
-    console.log({ files, currentTarget: e.currentTarget }, 'SUBMIT CLICKED')
+    // console.log({ files, currentTarget: e.currentTarget }, 'SUBMIT CLICKED')
 
     // TODO: good UI
 

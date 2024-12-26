@@ -1,4 +1,4 @@
-import { append, concat, head, slice, tail, take } from 'ramda'
+import { append, concat, head, slice, tail, take } from 'npm:ramda'
 
 type Predicate<T> = (window: Array<T>) => boolean
 type FilterWindowsConfig<T> = {

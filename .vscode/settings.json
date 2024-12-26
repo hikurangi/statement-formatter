@@ -1,0 +1,8 @@
+{
+  "jest.enable": false,
+  "deno.enable": true,
+  "deno.codeLens.test": true,
+  "deno.codeLens.referencesAllFunctions": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.implementations": true
+}

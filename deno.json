@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "dev:server": "deno run --watch main.ts",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "nodeModulesDir": "auto"
+}

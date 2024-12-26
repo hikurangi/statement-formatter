@@ -1,10 +1,14 @@
-import { equals } from 'ramda'
-import extractSubarraysBetweenWindowsInclusive from '../src/lib/extract-subarrays-between-windows-inclusive'
+import { describe, test } from 'jsr:@std/testing/bdd'
+import { expect } from 'jsr:@std/expect'
+import { equals } from 'npm:ramda'
+import extractSubarraysBetweenWindowsInclusive from '../src/lib/extract-subarrays-between-windows-inclusive.ts'
 
 const startWindow = ['this', 'is', 'the', 'start', 'window', "i'm", 'serious']
-const isStartWindow = (window: Array<any>) => equals(window, startWindow)
+const isStartWindow = (window: Array<unknown>): boolean =>
+  equals(window, startWindow)
 const endWindow = ['this', 'is', 'the', 'end', 'window']
-const isEndWindow = (window: Array<any>) => equals(window, endWindow)
+const isEndWindow = (window: Array<unknown>): boolean =>
+  equals(window, endWindow)
 
 describe('extract subarrays between windows', () => {
   test('works for one subarray', () => {
