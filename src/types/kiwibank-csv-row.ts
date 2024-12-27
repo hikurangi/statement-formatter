@@ -1,5 +1,5 @@
 import { z } from 'npm:zod'
-import { D } from 'npm:@mobily/ts-belt'
+import { keys } from 'npm:ramda'
 import { OUTPUT_DATE_FORMAT } from '../lib/kiwibank-date-format-regex.ts'
 
 // NOTE: zod is probably overkill for now
@@ -22,5 +22,5 @@ export const KiwibankCSVRowZ = z.object({
   Amount: z.number(), // positive or negative
   Balance: z.number(), // positive or negative
 })
-export const kiwibankCSVRowHeaders = D.keys(KiwibankCSVRowZ.shape)
+export const kiwibankCSVRowHeaders = keys(KiwibankCSVRowZ.shape)
 export type KiwibankCSVRowT = z.infer<typeof KiwibankCSVRowZ>
