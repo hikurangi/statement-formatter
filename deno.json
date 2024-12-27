@@ -5,5 +5,8 @@
     "build": "next build",
     "start": "next start"
   },
-  "nodeModulesDir": "auto"
+  "nodeModulesDir": "auto",
+  "compilerOptions": {
+    "noUncheckedIndexedAccess": true
+  }
 }
